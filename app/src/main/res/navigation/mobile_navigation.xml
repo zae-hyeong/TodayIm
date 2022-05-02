@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.UXUI.todayim.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_calendarView"
+        android:name="com.UXUI.todayim.ui.calendarView.CalendarViewFragment"
+        android:label="@string/title_calendarView"
+        tools:layout="@layout/fragment_view_calendar" />
+
+    <fragment
+        android:id="@+id/navigation_listView"
+        android:name="com.UXUI.todayim.ui.listView.ListViewFragment"
+        android:label="@string/title_listView"
+        tools:layout="@layout/fragment_view_list" />
+
+    <fragment
+        android:id="@+id/navigation_version"
+        android:name="com.UXUI.todayim.ui.calendarView.VersionFragment"
+        android:label="@string/title_version"
+        tools:layout="@layout/fragment_version" />
+</navigation>
