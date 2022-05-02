@@ -1,4 +1,4 @@
-package com.UXUI.todayim.ui.calendarView
+package com.UXUI.todayim.ui.version
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -32,6 +32,8 @@ class VersionFragment : Fragment() {
         dashboardViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
+
         return root
     }
 

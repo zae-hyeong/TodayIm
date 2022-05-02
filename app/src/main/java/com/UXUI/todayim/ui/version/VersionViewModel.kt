@@ -1,4 +1,4 @@
-package com.UXUI.todayim.ui.calendarView
+package com.UXUI.todayim.ui.version
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

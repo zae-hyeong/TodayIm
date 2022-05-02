@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.UXUI.todayim.databinding.FragmentViewCalendarBinding
+import com.UXUI.todayim.ui.version.VersionViewModel
 
 class CalendarViewFragment : Fragment() {
 

@@ -11,4 +11,10 @@
     <string name="dialog_base_ok">확인</string>
     <string name="dialog_base_title">Title</string>
 
+    //splash
+    <string name="main_logo">Logo</string>
+
+    //home
+    <string name="home_test_start_ment">당신의 오늘은\n어땠나요</string>
+
 </resources>

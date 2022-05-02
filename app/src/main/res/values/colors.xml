@@ -10,5 +10,7 @@
     <color name="gray">#FFDFDFDF</color>
 
     //main colors
-    <color name="main">#3F51B5</color>
+    <color name="main">#FF343E4D</color>
+    <color name="sub">#FF3E628F</color>
+
 </resources>

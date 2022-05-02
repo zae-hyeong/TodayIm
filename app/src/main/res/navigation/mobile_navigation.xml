@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/navigation_version"
-        android:name="com.UXUI.todayim.ui.calendarView.VersionFragment"
+        android:name="com.UXUI.todayim.ui.version.VersionFragment"
         android:label="@string/title_version"
         tools:layout="@layout/fragment_version" />
 </navigation>
