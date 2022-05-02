@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.UXUI.todayim.databinding.FragmentVersionBinding
+import com.UXUI.todayim.ui.version.VersionViewModel
 
 class VersionFragment : Fragment() {
 
@@ -32,8 +33,6 @@ class VersionFragment : Fragment() {
         dashboardViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
-
-
         return root
     }
 
