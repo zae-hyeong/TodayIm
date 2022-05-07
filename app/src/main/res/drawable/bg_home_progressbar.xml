@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/background">
+<!--        <bitmap-->
+<!--            android:src="@drawable/ic_star_black_36dp"-->
+<!--            android:tint="?attr/colorControlNormal"-->
+<!--            android:alpha="?attr/disabledAlpha" />-->
         <bitmap
             android:src="@drawable/ic_star_black_36dp"
-            android:tint="?attr/colorControlNormal"
-            android:alpha="?attr/disabledAlpha" />
+            android:tint="?attr/colorControlNormal" />
     </item>
     <item android:id="@+id/secondaryProgress">
+<!--        <bitmap-->
+<!--            android:src="@drawable/ic_star_half_black_36dp"-->
+<!--            android:tint="?attr/colorControlActivated" />-->
         <bitmap
-            android:src="@drawable/ic_star_half_black_36dp"
+            android:src="@drawable/ic_star_black_36dp"
             android:tint="?attr/colorControlActivated" />
     </item>
     <item android:id="@+id/progress">
