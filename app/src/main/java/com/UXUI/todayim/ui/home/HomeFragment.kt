@@ -1,7 +1,9 @@
 package com.UXUI.todayim.ui.home
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +11,13 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.UXUI.todayim.MainActivity
 import com.UXUI.todayim.R
 import com.UXUI.todayim.ResultActivity
+import com.UXUI.todayim.TestActivity
 import com.UXUI.todayim.databinding.FragmentHomeBinding
+import java.lang.Thread.sleep
+import java.util.concurrent.TimeUnit
 
 class HomeFragment : Fragment(), View.OnClickListener, View.OnAttachStateChangeListener {
 
@@ -38,6 +44,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnAttachStateChangeL
 //        }
 
         binding.homeStartBtn.addOnAttachStateChangeListener(this)
+        binding.homeStartPb.progress = 0
 
         return root
     }
@@ -47,17 +54,23 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnAttachStateChangeL
         _binding = null
     }
 
-    override fun onClick(view: View?) {
-        when (view?.id) {
-            R.id.home_start_btn -> { startActivity(Intent(binding.root.context, ResultActivity::class.java)) }
+    override fun onViewAttachedToWindow(p0: View?) {
+        while(true){
+            binding.homeStartPb.progress++
+            sleep(100)
+            if(binding.homeStartPb.progress >=100) {
+                val startTestActivityIntent = Intent(activity, TestActivity::class.java)
+                startActivity(startTestActivityIntent)
+                break
+            }
         }
     }
 
-    override fun onViewAttachedToWindow(p0: View?) {
-        TODO("Not yet implemented")
+    override fun onViewDetachedFromWindow(p0: View?) {
+        //TODO("Not yet implemented")
     }
 
-    override fun onViewDetachedFromWindow(p0: View?) {
-        TODO("Not yet implemented")
+    override fun onClick(p0: View?) {
+        //TODO("Not yet implemented")
     }
 }
