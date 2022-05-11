@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.UXUI.todayim.databinding.FragmentVersionBinding
 import com.UXUI.todayim.ui.version.VersionViewModel
 
+//test_anna
+
 class VersionFragment : Fragment() {
 
     private var _binding: FragmentVersionBinding? = null
