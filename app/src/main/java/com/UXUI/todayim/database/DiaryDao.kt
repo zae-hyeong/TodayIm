@@ -5,15 +5,15 @@ import androidx.room.*
 @Dao // Data Access Object
 interface DiaryDao {
     @Insert
-    fun insertDiaryData(diaryInfo: DiaryInfo)
+    fun insertDiaryData(diary: Diary)
 
     @Update
-    fun updateDiaryInfo(diaryInfo: DiaryInfo)
+    fun updateDiaryInfo(diary: Diary)
 
     @Delete
-    fun deleteDiaryInfo(diaryInfo: DiaryInfo)
+    fun deleteDiaryInfo(diary: Diary)
 
     // ==== QUERY ===== //
-    @Query("SELECT * FROM DiaryInfo ORDER BY diaryDate DESC")
-    fun getAllDiaryData(): List<DiaryInfo>
+    @Query("SELECT * FROM Diary ORDER BY diaryDate DESC")
+    fun getAllDiaryData(): List<Diary>
 }

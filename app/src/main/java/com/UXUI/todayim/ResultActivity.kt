@@ -6,7 +6,7 @@ import android.widget.Toast
 import com.UXUI.todayim.base.BaseActivity
 import com.UXUI.todayim.databinding.ActivityResultBinding
 import com.UXUI.todayim.database.DiaryDatabase
-import com.UXUI.todayim.database.DiaryInfo
+import com.UXUI.todayim.database.Diary
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -59,7 +59,7 @@ class ResultActivity: BaseActivity(), View.OnClickListener {
                 }
 
                 // 일기 데이터 생성
-                val diaryInfo = DiaryInfo(binding.etContent.text.toString(), SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(
+                val diaryInfo = Diary(binding.etContent.text.toString(), SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(
                     Date()
                 ))
 

@@ -3,8 +3,8 @@ package com.UXUI.todayim.ui.listView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.UXUI.todayim.Record
-import com.UXUI.todayim.Records
+import com.UXUI.todayim.base.records
+import com.UXUI.todayim.database.Diary
 import com.UXUI.todayim.databinding.ItemRecordListBinding
 
 class RecordRV : RecyclerView.Adapter<RecordRV.RecordViewHolder>() {
@@ -16,9 +16,9 @@ class RecordRV : RecyclerView.Adapter<RecordRV.RecordViewHolder>() {
     }
 
     inner class RecordViewHolder(private val binding: ItemRecordListBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(record: Record) {
-            binding.itemRecordBodyTv.text= record.description
-            binding.itemRecordDateTv.text= record.date
+        fun bind(diary: Diary) {
+            binding.itemRecordBodyTv.text= diary.diaryComment
+            binding.itemRecordDateTv.text= diary.diaryDate
         }
     }
 
@@ -29,11 +29,11 @@ class RecordRV : RecyclerView.Adapter<RecordRV.RecordViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecordViewHolder, position: Int) {
-        holder.bind(Records[position])
+        holder.bind(records[position])
         //TODO("Not yet implemented")
     }
 
-    override fun getItemCount(): Int = Records.size
+    override fun getItemCount(): Int = records.size
 
     fun setRecordClickListener(itemClickListener: RecordClickListener) {
         recordClickListener = itemClickListener
