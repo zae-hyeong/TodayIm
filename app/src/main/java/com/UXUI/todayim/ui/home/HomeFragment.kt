@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -12,7 +13,7 @@ import com.UXUI.todayim.R
 import com.UXUI.todayim.ResultActivity
 import com.UXUI.todayim.databinding.FragmentHomeBinding
 
-class HomeFragment : Fragment(), View.OnClickListener {
+class HomeFragment : Fragment(), View.OnClickListener, View.OnAttachStateChangeListener {
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -35,7 +36,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
 //        homeViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
 //        }
-        binding.homeStartBtn.setOnClickListener(this)
+
+        binding.homeStartBtn.addOnAttachStateChangeListener(this)
 
         return root
     }
@@ -49,5 +51,13 @@ class HomeFragment : Fragment(), View.OnClickListener {
         when (view?.id) {
             R.id.home_start_btn -> { startActivity(Intent(binding.root.context, ResultActivity::class.java)) }
         }
+    }
+
+    override fun onViewAttachedToWindow(p0: View?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onViewDetachedFromWindow(p0: View?) {
+        TODO("Not yet implemented")
     }
 }

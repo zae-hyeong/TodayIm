@@ -21,17 +21,15 @@ class SplashActivity: BaseActivity() {
             //액티비티 이동
             startMainActivity()
         }, DURATION)
-
     }
 
     companion object {
-        private const val DURATION : Long = 3000
+        private const val DURATION : Long = 1500
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
     }
-
 
     private fun startMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
