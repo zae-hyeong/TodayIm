@@ -54,6 +54,7 @@
                 >
 
                 <Button
+                    android:id="@+id/test_c1_btn"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="버튼 1"
@@ -62,6 +63,7 @@
                     />
 
                 <Button
+                    android:id="@+id/test_c2_btn"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="버튼 2"
@@ -70,6 +72,7 @@
                     />
 
                 <Button
+                    android:id="@+id/test_c3_btn"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="버튼 3"
@@ -78,6 +81,7 @@
                     />
 
                 <Button
+                    android:id="@+id/test_c4_btn"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="버튼 4"

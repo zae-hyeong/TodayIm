@@ -12,5 +12,7 @@ class TestActivity: BaseActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityTestBinding.inflate(layoutInflater)
+
+
     }
 }
