@@ -59,7 +59,7 @@ class ResultActivity: BaseActivity(), View.OnClickListener {
                 }
 
                 // 일기 데이터 생성
-                val diaryInfo = Diary(binding.etContent.text.toString(), SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(
+                val diaryInfo = Diary(binding.etContent.text.toString(), SimpleDateFormat("yyyy-MM-dd").format(
                     Date()
                 ))
 

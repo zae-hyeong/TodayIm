@@ -13,7 +13,7 @@ import com.UXUI.todayim.R
 import com.UXUI.todayim.ResultActivity
 import com.UXUI.todayim.databinding.FragmentHomeBinding
 
-class HomeFragment : Fragment(), View.OnClickListener, View.OnAttachStateChangeListener {
+class HomeFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -37,7 +37,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnAttachStateChangeL
 //            textView.text = it
 //        }
 
-        binding.homeStartBtn.addOnAttachStateChangeListener(this)
+        binding.homeStartBtn.setOnClickListener(this)
 
         return root
     }
@@ -51,13 +51,5 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnAttachStateChangeL
         when (view?.id) {
             R.id.home_start_btn -> { startActivity(Intent(binding.root.context, ResultActivity::class.java)) }
         }
-    }
-
-    override fun onViewAttachedToWindow(p0: View?) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onViewDetachedFromWindow(p0: View?) {
-        TODO("Not yet implemented")
     }
 }
