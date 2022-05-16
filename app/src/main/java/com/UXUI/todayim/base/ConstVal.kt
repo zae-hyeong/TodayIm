@@ -2,6 +2,7 @@ package com.UXUI.todayim.base
 
 import com.UXUI.todayim.database.Diary
 import com.UXUI.todayim.database.EmotionCategory
+import com.UXUI.todayim.database.EmotionDataSet
 
 //사용할 감정 Set
 //val Emotions = {
@@ -12,4 +13,4 @@ import com.UXUI.todayim.database.EmotionCategory
 
 val records = ArrayList<Diary>()
 
-val emotions = ArrayList<EmotionCategory>()
+val emotions = ArrayList<EmotionDataSet>()
