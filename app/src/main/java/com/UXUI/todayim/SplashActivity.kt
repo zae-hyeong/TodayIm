@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.UXUI.todayim.base.BaseActivity
+import com.UXUI.todayim.database.EmotionCategory
 import com.UXUI.todayim.databinding.ActivitySplashBinding
 
 @SuppressLint("CustomSplashScreen")
@@ -37,4 +38,12 @@ class SplashActivity: BaseActivity() {
         startActivity(intent)
         finish()
     }
+
+//    private fun addDummyEmotions() {
+//        EmotionCategory(
+//            diaryIdx = 0,
+//            categoryName = "편안함",
+//            emotions = arrayOf()
+//        )
+//    }
 }

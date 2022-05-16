@@ -11,3 +11,5 @@ import com.UXUI.todayim.database.EmotionCategory
 //}
 
 val records = ArrayList<Diary>()
+
+val emotions = ArrayList<EmotionCategory>()

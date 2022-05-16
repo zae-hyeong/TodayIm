@@ -16,7 +16,7 @@ import java.util.*
 /**
  * 결과 화면
  */
-class ResultActivity: BaseActivity(), View.OnClickListener {
+class ResultActivity: BaseActivity() {
     private var mBinding: ActivityResultBinding? = null
     private val binding get() = mBinding!!
     private lateinit var roomDatabase: DiaryDatabase
@@ -47,8 +47,8 @@ class ResultActivity: BaseActivity(), View.OnClickListener {
         super.onDestroy()
     }
 
-    override fun onClick(view: View?) {
-        when (view!!.id) {
+    override fun onClick(v: View?) {
+        when (v!!.id) {
             R.id.btn_complete-> {
                 // 완료 버튼 클릭
 
