@@ -10,9 +10,11 @@ import com.UXUI.todayim.databinding.ActivityTestBinding
 class TestActivity: BaseActivity() {
     lateinit var binding: ActivityTestBinding
 
-    val LIMIT_REPEAT_NUM: Int = 10
-
     lateinit var choiceArray: ArrayList<EmotionAdjective>
+
+    companion object {
+        private const val LIMIT_REPEAT_NUM: Int = 10
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
