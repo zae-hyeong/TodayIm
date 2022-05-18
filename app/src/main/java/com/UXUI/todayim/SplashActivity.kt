@@ -6,10 +6,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.UXUI.todayim.base.BaseActivity
-import com.UXUI.todayim.base.emotions
-import com.UXUI.todayim.database.Emotion
-import com.UXUI.todayim.database.EmotionCategory
-import com.UXUI.todayim.database.EmotionDataSet
 import com.UXUI.todayim.databinding.ActivitySplashBinding
 
 @SuppressLint("CustomSplashScreen")

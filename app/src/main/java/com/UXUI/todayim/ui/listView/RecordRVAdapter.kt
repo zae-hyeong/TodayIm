@@ -29,7 +29,6 @@ class RecordRVAdapter : RecyclerView.Adapter<RecordRVAdapter.RecordViewHolder>()
 
     override fun onBindViewHolder(holder: RecordViewHolder, position: Int) {
         holder.bind(records[position])
-        //TODO("Not yet implemented")
     }
 
     override fun getItemCount(): Int = records.size

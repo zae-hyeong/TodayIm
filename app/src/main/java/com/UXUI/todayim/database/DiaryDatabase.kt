@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Diary::class], version = 1)
+@Database(entities = [Diary::class, DiaryEmotionCategory::class, DiaryEmotionDetail::class], version = 1)
 abstract class DiaryDatabase : RoomDatabase() {
     abstract fun diaryDao(): DiaryDao
 
@@ -20,7 +20,7 @@ abstract class DiaryDatabase : RoomDatabase() {
                         context.applicationContext,
                         DiaryDatabase::class.java,
                         "diary-database"
-                    ).build()
+                    ).allowMainThreadQueries().build()
                 }
             }
             return instance
