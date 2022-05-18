@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.View
 import com.UXUI.todayim.base.BaseActivity
 import com.UXUI.todayim.database.EmotionAdjective
+import com.UXUI.todayim.database.EmotionAdjectiveDatabase
 import com.UXUI.todayim.databinding.ActivitySplashBinding
 import com.UXUI.todayim.databinding.ActivityTestBinding
 
 class TestActivity: BaseActivity() {
     lateinit var binding: ActivityTestBinding
 
-    lateinit var choiceArray: ArrayList<EmotionAdjective>
+    lateinit var choiceArray: List<EmotionAdjective>
 
     companion object {
         private const val LIMIT_REPEAT_NUM: Int = 10
@@ -23,11 +24,11 @@ class TestActivity: BaseActivity() {
 
         initView()
 
-//        var i: Int = 0
-//
-//        while( i < LIMIT_REPEAT_NUM ) {
-//
-//        }
+        var i: Int = 0
+
+        while( i < LIMIT_REPEAT_NUM ) {
+
+        }
     }
 
     private fun initView() {
@@ -58,6 +59,16 @@ class TestActivity: BaseActivity() {
 
             }
         }
+    }
+
+    private fun getAdjectives() {
+        val emotionAdjectiveDB = EmotionAdjectiveDatabase.getInstance(this)!!
+        choiceArray = emotionAdjectiveDB.emotionAdjectiveDao().getRandom4Adjective()
+
+        binding.testC1Btn.text = choiceArray[0].adjectiveName
+        binding.testC2Btn.text = choiceArray[1].adjectiveName
+        binding.testC3Btn.text = choiceArray[2].adjectiveName
+        binding.testC4Btn.text = choiceArray[3].adjectiveName
     }
 }
 
