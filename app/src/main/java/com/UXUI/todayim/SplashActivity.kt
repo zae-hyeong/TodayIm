@@ -20,13 +20,13 @@ class SplashActivity: BaseActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivitySplashBinding.inflate(layoutInflater)
+
+        addDummyAdjectives()
+
         Handler(Looper.getMainLooper()).postDelayed({
             //액티비티 이동
             startMainActivity()
         }, DURATION)
-
-        addDummyAdjectives()
-
     }
 
     companion object {

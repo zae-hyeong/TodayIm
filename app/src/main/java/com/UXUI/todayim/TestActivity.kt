@@ -3,6 +3,7 @@ package com.UXUI.todayim
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.UXUI.todayim.base.BaseActivity
 import com.UXUI.todayim.database.EmotionAdjective
 import com.UXUI.todayim.database.EmotionAdjectiveDatabase
@@ -50,6 +51,7 @@ class TestActivity: BaseActivity() {
     }
     private fun setInitialize(){
         binding = ActivityTestBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         emotionAdjectiveDB = EmotionAdjectiveDatabase.getInstance(this)!!
     }
@@ -66,10 +68,16 @@ class TestActivity: BaseActivity() {
     private fun getAdjectives(emotionAdjectiveDB: EmotionAdjectiveDatabase) {
         choiceArray = emotionAdjectiveDB.emotionAdjectiveDao().getRandom4Adjective()
 
-        binding.testC1Btn.text = choiceArray[0].adjectiveName
-        binding.testC2Btn.text = choiceArray[1].adjectiveName
-        binding.testC3Btn.text = choiceArray[2].adjectiveName
-        binding.testC4Btn.text = choiceArray[3].adjectiveName
+        if(choiceArray.isEmpty()) {
+            Thread.sleep(1000)
+            Toast.makeText(this, "연결 대기", Toast.LENGTH_SHORT).show()
+        }
+        else {
+            binding.testC1Btn.text = choiceArray[0].adjectiveName
+            binding.testC2Btn.text = choiceArray[1].adjectiveName
+            binding.testC3Btn.text = choiceArray[2].adjectiveName
+            binding.testC4Btn.text = choiceArray[3].adjectiveName
+        }
     }
 
     private fun choiceClickFunction(choiceNum: Int) {

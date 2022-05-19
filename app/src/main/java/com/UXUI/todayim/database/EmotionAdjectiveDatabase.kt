@@ -20,7 +20,7 @@ abstract class EmotionAdjectiveDatabase : RoomDatabase() {
                         context.applicationContext,
                         EmotionAdjectiveDatabase::class.java,
                         "emotionAdjective-database"
-                    ).build()
+                    ).allowMainThreadQueries().build()
                 }
             }
             return instance

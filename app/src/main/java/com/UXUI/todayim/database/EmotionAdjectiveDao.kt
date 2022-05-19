@@ -10,7 +10,7 @@ interface EmotionAdjectiveDao {
     @Insert
     fun insertAdjective(adjective: EmotionAdjective)
 
-    // ==== QUERY ===== //
+//    // ==== QUERY ===== //
 
     @Query("SELECT * FROM EmotionAdjectiveCategory")
     fun getAdjectiveCategories(): List<EmotionAdjectiveCategory>
@@ -18,8 +18,8 @@ interface EmotionAdjectiveDao {
     @Query("SELECT * FROM EmotionAdjective")
     fun getAdjectives(): List<EmotionAdjective>
 
-    @Query("SELECT * FROM EmotionAdjectiveCategory WHERE :categoryIdx")
-    fun getCategoryName(categoryIdx: Int): String
+//    @Query("SELECT * FROM EmotionAdjectiveCategory WHERE :categoryIdx")
+//    fun getCategoryName(categoryIdx: Int): String
 
 //    @Query("SELECT * FROM EmotionAdjectiveCategory WHERE :categoryIdx")
 //    fun getDiaryCategoryAdjectives(categoryIdx: Int): List<EmotionAdjective>

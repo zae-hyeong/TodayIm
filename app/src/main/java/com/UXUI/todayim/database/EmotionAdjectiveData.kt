@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class EmotionAdjectiveCategory(
     var adjectiveCategoryName: String= "내용 없음",
+    @PrimaryKey
     var adjectiveCategoryIdx: Int = 0
 )
 //) {
