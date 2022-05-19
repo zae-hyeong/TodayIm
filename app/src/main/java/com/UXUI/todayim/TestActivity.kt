@@ -1,5 +1,6 @@
 package com.UXUI.todayim
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.UXUI.todayim.base.BaseActivity
@@ -7,13 +8,17 @@ import com.UXUI.todayim.database.EmotionAdjective
 import com.UXUI.todayim.database.EmotionAdjectiveDatabase
 import com.UXUI.todayim.databinding.ActivitySplashBinding
 import com.UXUI.todayim.databinding.ActivityTestBinding
+import com.google.gson.Gson
 
 class TestActivity: BaseActivity() {
-    lateinit var binding: ActivityTestBinding
 
-    lateinit var choiceArray: List<EmotionAdjective>
+    private lateinit var binding: ActivityTestBinding
+    private lateinit var choiceArray: List<EmotionAdjective>
+    private lateinit var emotionAdjectiveDB: EmotionAdjectiveDatabase
 
     private val choiceResult= ArrayList<EmotionAdjective>()
+
+    private var i: Int = 0
 
     companion object {
         private const val LIMIT_REPEAT_NUM: Int = 10
@@ -22,44 +27,43 @@ class TestActivity: BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityTestBinding.inflate(layoutInflater)
-
+        setInitialize()
         initView()
-
-        var i: Int = 0
-
-        while( i < LIMIT_REPEAT_NUM ) {
-
-        }
-    }
-
-    private fun initView() {
-        binding.testC1Btn.setOnClickListener(ChoiceClickListener(choiceResult, choiceArray, 0))
-        binding.testC2Btn.setOnClickListener(ChoiceClickListener(choiceResult, choiceArray, 0))
-        binding.testC3Btn.setOnClickListener(ChoiceClickListener(choiceResult, choiceArray, 0))
-        binding.testC4Btn.setOnClickListener(ChoiceClickListener(choiceResult, choiceArray, 0))
     }
 
     override fun onClick(v: View?) {
         super.onClick(v)
         when(v!!.id) {
             R.id.test_c1_btn -> {
-
+                choiceClickFunction(0)
             }
             R.id.test_c2_btn -> {
-
+                choiceClickFunction(1)
             }
             R.id.test_c3_btn -> {
-
+                choiceClickFunction(2)
             }
             R.id.test_c4_btn -> {
-
+                choiceClickFunction(3)
             }
         }
     }
+    private fun setInitialize(){
+        binding = ActivityTestBinding.inflate(layoutInflater)
 
-    public fun getAdjectives() {
-        val emotionAdjectiveDB = EmotionAdjectiveDatabase.getInstance(this)!!
+        emotionAdjectiveDB = EmotionAdjectiveDatabase.getInstance(this)!!
+    }
+
+    private fun initView() {
+        getAdjectives(emotionAdjectiveDB)
+
+        binding.testC1Btn.setOnClickListener(this)
+        binding.testC2Btn.setOnClickListener(this)
+        binding.testC3Btn.setOnClickListener(this)
+        binding.testC4Btn.setOnClickListener(this)
+    }
+
+    private fun getAdjectives(emotionAdjectiveDB: EmotionAdjectiveDatabase) {
         choiceArray = emotionAdjectiveDB.emotionAdjectiveDao().getRandom4Adjective()
 
         binding.testC1Btn.text = choiceArray[0].adjectiveName
@@ -67,12 +71,20 @@ class TestActivity: BaseActivity() {
         binding.testC3Btn.text = choiceArray[2].adjectiveName
         binding.testC4Btn.text = choiceArray[3].adjectiveName
     }
-}
 
-private open class ChoiceClickListener(private val choiceResult: ArrayList<EmotionAdjective>, private val choiceArray: List<EmotionAdjective>, private val choiceNum: Int): View.OnClickListener{
-    override fun onClick(v: View?) {
+    private fun choiceClickFunction(choiceNum: Int) {
         choiceResult.add(choiceArray[choiceNum])
-        val activityInstance = TestActivity()
-        activityInstance.getAdjectives()
+        getAdjectives(emotionAdjectiveDB)
+        i++
+        if (i >= LIMIT_REPEAT_NUM)
+            startResultActivity()
+    }
+
+    private fun startResultActivity() {
+        val intent = Intent(this@TestActivity, ResultActivity::class.java)
+        val gson: Gson = Gson()
+        intent.putExtra("testResult", gson.toJson(choiceResult))
+        startActivity(intent)
+        finish()
     }
 }
