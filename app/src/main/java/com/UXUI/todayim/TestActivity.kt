@@ -2,12 +2,12 @@ package com.UXUI.todayim
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.UXUI.todayim.base.BaseActivity
-import com.UXUI.todayim.database.EmotionAdjective
-import com.UXUI.todayim.database.EmotionAdjectiveDatabase
-import com.UXUI.todayim.databinding.ActivitySplashBinding
+import com.UXUI.todayim.base.TEST_REPEAT_NUM
+import com.UXUI.todayim.database.*
 import com.UXUI.todayim.databinding.ActivityTestBinding
 import com.google.gson.Gson
 
@@ -17,13 +17,10 @@ class TestActivity: BaseActivity() {
     private lateinit var choiceArray: List<EmotionAdjective>
     private lateinit var emotionAdjectiveDB: EmotionAdjectiveDatabase
 
-    private val choiceResult= ArrayList<EmotionAdjective>()
+    private val adjectiveResult= ArrayList<DiaryEmotionDetail>()
+    private val categoryResult= ArrayList<DiaryEmotionCategory>()
 
     private var i: Int = 0
-
-    companion object {
-        private const val LIMIT_REPEAT_NUM: Int = 10
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,7 +67,7 @@ class TestActivity: BaseActivity() {
 
         if(choiceArray.isEmpty()) {
             Thread.sleep(1000)
-            Toast.makeText(this, "연결 대기", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "연결 실패", Toast.LENGTH_SHORT).show()
         }
         else {
             binding.testC1Btn.text = choiceArray[0].adjectiveName
@@ -81,17 +78,38 @@ class TestActivity: BaseActivity() {
     }
 
     private fun choiceClickFunction(choiceNum: Int) {
-        choiceResult.add(choiceArray[choiceNum])
+
+        val choicedAdjective = choiceArray[choiceNum]
+
+        adjectiveResult.add(
+            DiaryEmotionDetail(
+                adjective = choicedAdjective.adjectiveName,
+                adjectiveCategoryIdx = choicedAdjective.adjectiveCategoryIdx
+        ) )
+
+        val tempCategory = DiaryEmotionCategory(
+            adjectiveCategoryIdx= choicedAdjective.adjectiveCategoryIdx
+        )
+
+        if( !categoryResult.contains(tempCategory) ){
+            val dataForName =  emotionAdjectiveDB.emotionAdjectiveDao().getAdjectiveCategory(choicedAdjective.adjectiveCategoryIdx)
+            tempCategory.adjectiveCategoryName = dataForName.adjectiveCategoryName
+            categoryResult.add(tempCategory)
+        }
+
         getAdjectives(emotionAdjectiveDB)
+
         i++
-        if (i >= LIMIT_REPEAT_NUM)
+        if ( i >= TEST_REPEAT_NUM ) {
             startResultActivity()
+        }
     }
 
     private fun startResultActivity() {
         val intent = Intent(this@TestActivity, ResultActivity::class.java)
         val gson: Gson = Gson()
-        intent.putExtra("testResult", gson.toJson(choiceResult))
+        intent.putExtra("categoryResult", gson.toJson(categoryResult))
+        intent.putExtra("adjectiveResult", gson.toJson(adjectiveResult))
         startActivity(intent)
         finish()
     }

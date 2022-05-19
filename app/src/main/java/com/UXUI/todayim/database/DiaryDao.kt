@@ -7,6 +7,12 @@ interface DiaryDao {
     @Insert
     fun insertDiaryData(diary: Diary)
 
+    @Insert
+    fun insertDiaryEmotionCategory(diaryEmotionCategory: DiaryEmotionCategory)
+
+    @Insert
+    fun insertDiaryEmotionDetail(diaryEmotionDetail: DiaryEmotionDetail)
+
     @Update
     fun updateDiaryInfo(diary: Diary)
 
@@ -14,6 +20,9 @@ interface DiaryDao {
     fun deleteDiaryInfo(diary: Diary)
 
     // ==== QUERY ===== //
+    @Query("SELECT diaryIdx FROM Diary WHERE diaryDate = :date")
+    fun getDiaryIdx(date: String): Int
+
     @Query("SELECT * FROM Diary ORDER BY diaryDate DESC")
     fun getAllDiaryData(): List<Diary>
 

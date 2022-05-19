@@ -14,8 +14,9 @@ data class Diary(
 
 @Entity
 data class DiaryEmotionCategory(
-    var diaryIdx: Int,
-    var adjectiveCategoryIdx: String
+    var adjectiveCategoryIdx: Int = -1,
+    var adjectiveCategoryName: String = "",
+    var diaryIdx: Int = -1
 ){
     @PrimaryKey(autoGenerate = true)
     var diaryCategoryIdx: Int = 0
@@ -23,8 +24,9 @@ data class DiaryEmotionCategory(
 
 @Entity
 data class DiaryEmotionDetail(
-    var adjectiveIdx: String,
-    var diaryIdx: String
+    var adjectiveCategoryIdx: Int = -1,
+    var adjective: String = "",
+    var diaryIdx: Int = -1
 ){
     @PrimaryKey(autoGenerate = true)
     var diaryEmotionIdx: Int = 0
