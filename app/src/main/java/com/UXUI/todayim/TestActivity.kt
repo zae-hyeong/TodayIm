@@ -88,20 +88,29 @@ class TestActivity: BaseActivity() {
         ) )
 
         val tempCategory = DiaryEmotionCategory(
-            adjectiveCategoryIdx= choicedAdjective.adjectiveCategoryIdx
+            adjectiveCategoryIdx= choicedAdjective.adjectiveCategoryIdx,
         )
 
         if( !categoryResult.contains(tempCategory) ){
-            val dataForName =  emotionAdjectiveDB.emotionAdjectiveDao().getAdjectiveCategory(choicedAdjective.adjectiveCategoryIdx)
-            tempCategory.adjectiveCategoryName = dataForName.adjectiveCategoryName
             categoryResult.add(tempCategory)
         }
 
         getAdjectives(emotionAdjectiveDB)
 
+        Log.d("TestActivity", "problem Num : $i")
+
         i++
         if ( i >= TEST_REPEAT_NUM ) {
+            var j: Int =0
+            while( j <  categoryResult.size ) {
+                tempCategory.adjectiveCategoryName = emotionAdjectiveDB
+                    .emotionAdjectiveDao()
+                    .getAdjectiveCategoryName(categoryResult[j].adjectiveCategoryIdx)
+                j++
+            }
+
             startResultActivity()
+            finish()
         }
     }
 
