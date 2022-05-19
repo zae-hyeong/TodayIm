@@ -13,6 +13,8 @@ class TestActivity: BaseActivity() {
 
     lateinit var choiceArray: List<EmotionAdjective>
 
+    private val choiceResult= ArrayList<EmotionAdjective>()
+
     companion object {
         private const val LIMIT_REPEAT_NUM: Int = 10
     }
@@ -32,15 +34,10 @@ class TestActivity: BaseActivity() {
     }
 
     private fun initView() {
-        binding.testC1Btn.tag = 0
-        binding.testC2Btn.tag = 1
-        binding.testC3Btn.tag = 2
-        binding.testC4Btn.tag = 3
-
-        binding.testC1Btn.setOnClickListener(this)
-        binding.testC2Btn.setOnClickListener(this)
-        binding.testC3Btn.setOnClickListener(this)
-        binding.testC4Btn.setOnClickListener(this)
+        binding.testC1Btn.setOnClickListener(ChoiceClickListener(choiceResult, choiceArray, 0))
+        binding.testC2Btn.setOnClickListener(ChoiceClickListener(choiceResult, choiceArray, 0))
+        binding.testC3Btn.setOnClickListener(ChoiceClickListener(choiceResult, choiceArray, 0))
+        binding.testC4Btn.setOnClickListener(ChoiceClickListener(choiceResult, choiceArray, 0))
     }
 
     override fun onClick(v: View?) {
@@ -61,7 +58,7 @@ class TestActivity: BaseActivity() {
         }
     }
 
-    private fun getAdjectives() {
+    public fun getAdjectives() {
         val emotionAdjectiveDB = EmotionAdjectiveDatabase.getInstance(this)!!
         choiceArray = emotionAdjectiveDB.emotionAdjectiveDao().getRandom4Adjective()
 
@@ -72,3 +69,10 @@ class TestActivity: BaseActivity() {
     }
 }
 
+private open class ChoiceClickListener(private val choiceResult: ArrayList<EmotionAdjective>, private val choiceArray: List<EmotionAdjective>, private val choiceNum: Int): View.OnClickListener{
+    override fun onClick(v: View?) {
+        choiceResult.add(choiceArray[choiceNum])
+        val activityInstance = TestActivity()
+        activityInstance.getAdjectives()
+    }
+}
