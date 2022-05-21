@@ -24,9 +24,6 @@ interface EmotionAdjectiveDao {
     @Query("SELECT adjectiveCategoryName FROM EmotionAdjectiveCategory WHERE adjectiveCategoryIdx = :categoryIdx")
     fun getAdjectiveCategoryName(categoryIdx: Int): String
 
-//    @Query("SELECT * FROM EmotionAdjectiveCategory WHERE adjectiveCategoryIdx = :categoryIdx")
-//    fun getDiaryCategoryAdjectives(categoryIdx: Int): List<EmotionAdjective>
-
     @Query("SELECT * FROM EmotionAdjective ORDER BY random() LIMIT 4")
     fun getRandom4Adjective(): List<EmotionAdjective>
 }

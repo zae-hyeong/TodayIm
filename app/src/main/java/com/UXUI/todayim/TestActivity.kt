@@ -62,21 +62,6 @@ class TestActivity: BaseActivity() {
         binding.testC4Btn.setOnClickListener(this)
     }
 
-    private fun getAdjectives(emotionAdjectiveDB: EmotionAdjectiveDatabase) {
-        choiceArray = emotionAdjectiveDB.emotionAdjectiveDao().getRandom4Adjective()
-
-        if(choiceArray.isEmpty()) {
-            Thread.sleep(1000)
-            Toast.makeText(this, "연결 실패", Toast.LENGTH_SHORT).show()
-        }
-        else {
-            binding.testC1Btn.text = choiceArray[0].adjectiveName
-            binding.testC2Btn.text = choiceArray[1].adjectiveName
-            binding.testC3Btn.text = choiceArray[2].adjectiveName
-            binding.testC4Btn.text = choiceArray[3].adjectiveName
-        }
-    }
-
     private fun choiceClickFunction(choiceNum: Int) {
 
         val selectedAdjective = choiceArray[choiceNum]
@@ -96,11 +81,9 @@ class TestActivity: BaseActivity() {
             categoryResult.add(tempCategory)
         }
 
-        getAdjectives(emotionAdjectiveDB)
-
         i++
         if ( i >= TEST_REPEAT_NUM ) {
-            var j: Int =0
+            var j =0
             while( j <  categoryResult.size ) {
                 categoryResult[j].adjectiveCategoryName = emotionAdjectiveDB.emotionAdjectiveDao()
                     .getAdjectiveCategoryName(categoryResult[j].adjectiveCategoryIdx)
@@ -109,6 +92,23 @@ class TestActivity: BaseActivity() {
 
             startResultActivity()
             finish()
+        }
+
+        getAdjectives(emotionAdjectiveDB)
+    }
+
+    private fun getAdjectives(emotionAdjectiveDB: EmotionAdjectiveDatabase) {
+        choiceArray = emotionAdjectiveDB.emotionAdjectiveDao().getRandom4Adjective()
+
+        if(choiceArray.isEmpty()) {
+            Thread.sleep(1000)
+            Toast.makeText(this, "연결 실패", Toast.LENGTH_SHORT).show()
+        }
+        else {
+            binding.testC1Btn.text = choiceArray[0].adjectiveName
+            binding.testC2Btn.text = choiceArray[1].adjectiveName
+            binding.testC3Btn.text = choiceArray[2].adjectiveName
+            binding.testC4Btn.text = choiceArray[3].adjectiveName
         }
     }
 
