@@ -21,33 +21,15 @@
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <!--        <ProgressBar-->
-            <!--            android:id="@+id/progressBar_1"-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            android:layout_height="wrap_content"-->
-            <!--            android:scaleY="4"-->
-            <!--            android:indeterminateTint="@color/main"-->
-            <!--            android:layout_marginVertical="10dp"-->
-            <!--            style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
-            <!--            android:progress="50"/>-->
-
-            <!--        <ProgressBar-->
-            <!--            android:id="@+id/progressBar_2"-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            android:layout_height="wrap_content"-->
-            <!--            android:scaleY="4"-->
-            <!--            android:indeterminateTint="@color/main"-->
-            <!--            android:layout_marginVertical="10dp"-->
-            <!--            style="@style/Widget.AppCompat.ProgressBar.Horizontal" />-->
-
-            <!--        <ProgressBar-->
-            <!--            android:id="@+id/progressBar_3"-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            android:layout_height="wrap_content"-->
-            <!--            android:scaleY="4"-->
-            <!--            android:indeterminateTint="@color/main"-->
-            <!--            android:layout_marginVertical="10dp"-->
-            <!--            style="@style/Widget.AppCompat.ProgressBar.Horizontal" />-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="검사 결과"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="30sp"
+                android:layout_marginBottom="30dp"
+                />
 
         </LinearLayout>
 
@@ -61,7 +43,7 @@
             android:layout_marginBottom="16dp"
             android:textSize="18sp"
             android:textColor="@color/black"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             app:layout_constraintTop_toBottomOf="@id/result_progressBar_layout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -96,6 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:layout_gravity="end"
+            android:background="@drawable/bg_button_base"
             android:text="완료"
             app:layout_constraintTop_toBottomOf="@id/result_content_et"
             app:layout_constraintEnd_toEndOf="@id/result_content_et"/>

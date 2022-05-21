@@ -79,16 +79,17 @@ class TestActivity: BaseActivity() {
 
     private fun choiceClickFunction(choiceNum: Int) {
 
-        val choicedAdjective = choiceArray[choiceNum]
+        val selectedAdjective = choiceArray[choiceNum]
 
         adjectiveResult.add(
             DiaryEmotionDetail(
-                adjective = choicedAdjective.adjectiveName,
-                adjectiveCategoryIdx = choicedAdjective.adjectiveCategoryIdx
+                adjective = selectedAdjective.adjectiveName,
+                adjectiveCategoryIdx = selectedAdjective.adjectiveCategoryIdx
         ) )
+        Log.d("TestActivity", "problem Num : $i, selectedAdjectives : ${selectedAdjective.adjectiveName}")
 
         val tempCategory = DiaryEmotionCategory(
-            adjectiveCategoryIdx= choicedAdjective.adjectiveCategoryIdx,
+            adjectiveCategoryIdx= selectedAdjective.adjectiveCategoryIdx,
         )
 
         if( !categoryResult.contains(tempCategory) ){
@@ -97,14 +98,11 @@ class TestActivity: BaseActivity() {
 
         getAdjectives(emotionAdjectiveDB)
 
-        Log.d("TestActivity", "problem Num : $i")
-
         i++
         if ( i >= TEST_REPEAT_NUM ) {
             var j: Int =0
             while( j <  categoryResult.size ) {
-                tempCategory.adjectiveCategoryName = emotionAdjectiveDB
-                    .emotionAdjectiveDao()
+                categoryResult[j].adjectiveCategoryName = emotionAdjectiveDB.emotionAdjectiveDao()
                     .getAdjectiveCategoryName(categoryResult[j].adjectiveCategoryIdx)
                 j++
             }

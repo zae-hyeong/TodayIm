@@ -1,10 +1,13 @@
 package com.UXUI.todayim
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.marginTop
 import com.UXUI.todayim.base.BaseActivity
@@ -53,20 +56,31 @@ class ResultActivity: BaseActivity() {
         progressBars = List<ProgressBar>(categoryResult.size) { ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal) }
 
         val layoutParams = LinearLayout.LayoutParams( LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT )
-            layoutParams.setMargins(0, 10, 0, 10)
+//            layoutParams.setMargins(0, 10, 0, 10)
 
 //        val progressBarInterval: Int = categoryResult.size/TEST_REPEAT_NUM
         var i: Int = 0
         while( i < categoryResult.size ) {
 //            progressBars[i].indeterminateDrawable.setColorFilter(resources.getColor(R.color.main), android.graphics.PorterDuff.Mode.SRC_IN);
-            progressBars[i].layoutParams = layoutParams
-            progressBars[i].scaleY = 4f
-            progressBars[i].progressDrawable = getDrawable(R.drawable.bg_result_progressbar)
+//            progressBars[i].layoutParams = layoutParams
+//            progressBars[i].scaleY = 4f
+//            progressBars[i].progressDrawable = getDrawable(R.drawable.bg_result_progressbar)
 //            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            progressBars[i].progress = adjectiveNum[i]*10
-            binding.resultProgressBarLayout.addView(progressBars[i])
+//            progressBars[i].progress = adjectiveNum[i]*10
+//            binding.resultProgressBarLayout.addView(progressBars[i])
+
+            val layoutInflater = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            val containView = layoutInflater.inflate(R.layout.layout_result_progressbar, null)
+            containView.findViewById<TextView>(R.id.layout_result_category_tv).text = categoryResult[i].adjectiveCategoryName
+            Log.d("ResultActivity>>>", "containView.findViewById<TextView>(R.id.layout_result_category_tv).text : ${containView.findViewById<TextView>(R.id.layout_result_category_tv).text}")
+            Log.d("ResultActivity>>>", "categoryResult[i].adjectiveCategoryName : ${categoryResult[i].adjectiveCategoryName}")
+            containView.findViewById<ProgressBar>(R.id.layout_result_progressbar).progress = adjectiveNum[i]*10
+
+            binding.resultProgressBarLayout.addView(containView)
+
             i++
         }
+
     }
 
     private fun countAdjectiveResult(adjectiveResult: List<DiaryEmotionDetail>): ArrayList<Int>{
