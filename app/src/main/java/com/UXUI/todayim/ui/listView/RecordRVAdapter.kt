@@ -11,7 +11,7 @@ class RecordRVAdapter : RecyclerView.Adapter<RecordRVAdapter.RecordViewHolder>()
     private lateinit var recordClickListener : RecordClickListener
 
     interface RecordClickListener{
-        fun onItemClick() //실행해줄 함수(데이터 랜더링을 위해 앨범 정보를 받아왔음!)
+        fun onItemClick(diary: Diary) //실행해줄 함수(데이터 랜더링을 위해 앨범 정보를 받아왔음!)
     }
 
     inner class RecordViewHolder(private val binding: ItemRecordListBinding): RecyclerView.ViewHolder(binding.root) {
@@ -29,6 +29,9 @@ class RecordRVAdapter : RecyclerView.Adapter<RecordRVAdapter.RecordViewHolder>()
 
     override fun onBindViewHolder(holder: RecordViewHolder, position: Int) {
         holder.bind(records[position])
+        holder.itemView.setOnClickListener {
+            recordClickListener.onItemClick(records[position])
+        }
     }
 
     override fun getItemCount(): Int = records.size
