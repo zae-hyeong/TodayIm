@@ -1,5 +1,7 @@
 package com.UXUI.todayim.ui.calendarView
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +11,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.UXUI.todayim.R
+import com.UXUI.todayim.ResultActivity
 import com.UXUI.todayim.database.Diary
 import com.UXUI.todayim.database.DiaryDatabase
 import com.UXUI.todayim.databinding.FragmentViewCalendarBinding
 import com.UXUI.todayim.ui.version.VersionViewModel
 import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
+import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -47,15 +51,25 @@ class CalendarViewFragment : Fragment(), View.OnClickListener, OnDayClickListene
         // room data base init
         roomDatabase = DiaryDatabase.getInstance(binding.root.context)!!
 
-        loadRecentCalendarData()
+        initView()
 
-        binding.btnModify.setOnClickListener(this)
-        binding.btnRemove.setOnClickListener(this)
-        binding.calendarView.setOnDayClickListener(this)
+        loadRecentCalendarData()
 
         return binding.root
     }
 
+    private fun initView() {
+        binding.btnModify.setOnClickListener(this)
+        binding.btnRemove.setOnClickListener(this)
+        binding.btnDetail.setOnClickListener(this)
+        binding.calendarView.setOnDayClickListener(this)
+
+        binding.btnModify.visibility = View.INVISIBLE
+        binding.btnRemove.visibility = View.INVISIBLE
+        binding.btnDetail.visibility = View.INVISIBLE
+    }
+
+    @SuppressLint("SimpleDateFormat")
     private fun loadRecentCalendarData() {
         // load recent diary save data to calendar
         CoroutineScope(Dispatchers.IO).launch {
@@ -82,6 +96,7 @@ class CalendarViewFragment : Fragment(), View.OnClickListener, OnDayClickListene
         _binding = null
     }
 
+    @SuppressLint("SimpleDateFormat")
     override fun onDayClick(eventDay: EventDay?) {
         CoroutineScope(Dispatchers.IO).launch {
             clickDiaryItem = roomDatabase.diaryDao().getFindSpecificData(SimpleDateFormat("yyyy-MM-dd").format(eventDay!!.calendar.time))
@@ -89,8 +104,9 @@ class CalendarViewFragment : Fragment(), View.OnClickListener, OnDayClickListene
                 requireActivity().runOnUiThread {
                     binding.btnModify.visibility = View.INVISIBLE
                     binding.btnRemove.visibility = View.INVISIBLE
-                    binding.tvClickDate.setText("")
-                    binding.etContent.setText("")
+                    binding.btnDetail.visibility = View.INVISIBLE
+                    binding.tvClickDate.text = ""
+                    with(binding) { etContent.setText("") }
                 }
                 return@launch
             }
@@ -98,7 +114,8 @@ class CalendarViewFragment : Fragment(), View.OnClickListener, OnDayClickListene
             requireActivity().runOnUiThread {
                 binding.btnModify.visibility = View.VISIBLE
                 binding.btnRemove.visibility = View.VISIBLE
-                binding.tvClickDate.setText(clickDiaryItem!!.diaryDate)
+                binding.btnDetail.visibility = View.VISIBLE
+                binding.tvClickDate.text = clickDiaryItem!!.diaryDate
                 binding.etContent.setText(clickDiaryItem!!.diaryComment)
             }
         }
@@ -108,7 +125,6 @@ class CalendarViewFragment : Fragment(), View.OnClickListener, OnDayClickListene
         when (view?.id) {
             R.id.btn_modify -> {
                 // 수정 하기
-
                 if (clickDiaryItem == null)
                     return
 
@@ -124,7 +140,6 @@ class CalendarViewFragment : Fragment(), View.OnClickListener, OnDayClickListene
 
             R.id.btn_remove -> {
                 // 삭제 하기
-
                 if (clickDiaryItem == null)
                     return
 
@@ -134,11 +149,22 @@ class CalendarViewFragment : Fragment(), View.OnClickListener, OnDayClickListene
                     requireActivity().runOnUiThread {
                         binding.btnModify.visibility = View.INVISIBLE
                         binding.btnRemove.visibility = View.INVISIBLE
-                        binding.tvClickDate.setText("")
+                        binding.btnDetail.visibility = View.INVISIBLE
+                        binding.tvClickDate.text = ""
                         binding.etContent.setText("")
                         Toast.makeText(binding.root.context, "삭제가 완료 되었습니다.", Toast.LENGTH_SHORT).show()
                     }
                 }
+            }
+
+            R.id.btn_detail -> {
+                if (clickDiaryItem == null) return
+
+                val intent = Intent(activity, ResultActivity::class.java)
+                val gson = Gson()
+
+                intent.putExtra("diaryInfo", gson.toJson(clickDiaryItem!!))
+                startActivity(intent)
             }
         }
     }

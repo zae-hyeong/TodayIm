@@ -5,21 +5,21 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Diary::class, DiaryEmotionCategory::class, DiaryEmotionDetail::class], version = 2, exportSchema = false)
-abstract class DiaryDatabase : RoomDatabase() {
-    abstract fun diaryDao(): DiaryDao
+@Database(entities = [EmotionAdjectiveCategory::class, EmotionAdjective::class], version = 1)
+abstract class EmotionAdjectiveDatabase : RoomDatabase() {
+    abstract fun emotionAdjectiveDao(): EmotionAdjectiveDao
 
     // 싱글톤 구현을 위해 companion object로 생성
     companion object {
-        private var instance: DiaryDatabase? = null
+        private var instance: EmotionAdjectiveDatabase? = null
         @Synchronized
-        fun getInstance(context: Context): DiaryDatabase? {
+        fun getInstance(context: Context): EmotionAdjectiveDatabase? {
             if (instance == null) {
-                synchronized(DiaryDatabase::class) {
+                synchronized(EmotionAdjectiveDatabase::class) {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
-                        DiaryDatabase::class.java,
-                        "diary-database"
+                        EmotionAdjectiveDatabase::class.java,
+                        "emotionAdjective-database"
                     ).allowMainThreadQueries().build()
                 }
             }

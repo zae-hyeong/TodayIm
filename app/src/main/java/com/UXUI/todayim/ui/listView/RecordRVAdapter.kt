@@ -3,11 +3,10 @@ package com.UXUI.todayim.ui.listView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.UXUI.todayim.base.records
 import com.UXUI.todayim.database.Diary
 import com.UXUI.todayim.databinding.ItemRecordListBinding
 
-class RecordRV : RecyclerView.Adapter<RecordRV.RecordViewHolder>() {
+class RecordRVAdapter : RecyclerView.Adapter<RecordRVAdapter.RecordViewHolder>() {
 
     private lateinit var recordClickListener : RecordClickListener
 
@@ -30,7 +29,6 @@ class RecordRV : RecyclerView.Adapter<RecordRV.RecordViewHolder>() {
 
     override fun onBindViewHolder(holder: RecordViewHolder, position: Int) {
         holder.bind(records[position])
-        //TODO("Not yet implemented")
     }
 
     override fun getItemCount(): Int = records.size

@@ -5,15 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.UXUI.todayim.R
-import com.UXUI.todayim.ResultActivity
+import com.UXUI.todayim.TestActivity
 import com.UXUI.todayim.databinding.FragmentHomeBinding
 
-class HomeFragment : Fragment(), View.OnClickListener {
+class HomeFragment : Fragment() { //, View.OnAttachStateChangeListener{
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -37,7 +33,11 @@ class HomeFragment : Fragment(), View.OnClickListener {
 //            textView.text = it
 //        }
 
-        binding.homeStartBtn.setOnClickListener(this)
+        binding.homeStartBtn.setOnClickListener {
+            val intent = Intent(context, TestActivity::class.java)
+            startActivity(intent)
+        }
+        binding.homeStartPb.progress = 0
 
         return root
     }
@@ -47,9 +47,19 @@ class HomeFragment : Fragment(), View.OnClickListener {
         _binding = null
     }
 
-    override fun onClick(view: View?) {
-        when (view?.id) {
-            R.id.home_start_btn -> { startActivity(Intent(binding.root.context, ResultActivity::class.java)) }
-        }
-    }
+//    override fun onViewAttachedToWindow(p0: View?) {
+//        while(true){
+//            binding.homeStartPb.progress++
+//            sleep(100)
+//            if(binding.homeStartPb.progress >=100) {
+//                val startTestActivityIntent = Intent(activity, TestActivity::class.java)
+//                startActivity(startTestActivityIntent)
+//                break
+//            }
+//        }
+//    }
+
+//    override fun onViewDetachedFromWindow(p0: View?) {
+//        //TODO("Not yet implemented")
+//    }
 }

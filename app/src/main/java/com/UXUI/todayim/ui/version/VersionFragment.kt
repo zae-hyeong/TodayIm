@@ -25,16 +25,16 @@ class VersionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(VersionViewModel::class.java)
+//        val dashboardViewModel =
+//            ViewModelProvider(this).get(VersionViewModel::class.java)
 
         _binding = FragmentVersionBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.versionMainTv
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+//        val textView: TextView = binding.versionMainTv
+//        dashboardViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
         return root
     }
 
