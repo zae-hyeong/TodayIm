@@ -35,9 +35,11 @@ interface DiaryDao {
     @Query("SELECT * FROM DiaryEmotionDetail WHERE diaryIdx = :diaryIdx ORDER BY adjectiveCategoryIdx ASC")
     fun getDiaryAdjectives(diaryIdx: Int): List<DiaryEmotionDetail>
 
-//    @Query("SELECT diaryIdx, diaryComment, diaryDate, diaryCategoryIdx, diaryEmotionIdx FROM Diary" +
-//            "    LEFT JOIN DiaryEmotionCategory ON DiaryEmotionCategory.diaryIdx = Diary.diaryIdx" +
-//            "    LEFT JOIN DiaryEmotionDetail ON DiaryEmotionDetail.diaryIdx = Diary.diaryIdx" +
-//            "    WHERE diaryDate = :date")
-//    fun getRecord(date: String): Diary
+    @Query("SELECT count(adjective.adjective) " +
+            "FROM DiaryEmotionCategory AS category " +
+            "    LEFT JOIN DiaryEmotionDetail AS adjective ON category.adjectiveCategoryIdx = adjective.adjectiveCategoryIdx " +
+            "WHERE category.diaryIdx = :diaryIdx " +
+            "GROUP BY category.adjectiveCategoryIdx " +
+            "ORDER BY category.adjectiveCategoryIdx ASC")
+    fun getCategoryAdjectiveNum(diaryIdx: Int): List<Int>
 }
