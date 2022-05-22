@@ -29,6 +29,12 @@ interface DiaryDao {
     @Query("SELECT * FROM Diary WHERE diaryDate = :date")
     fun getFindSpecificData(date: String): Diary
 
+    @Query("SELECT * FROM DiaryEmotionCategory WHERE diaryIdx = :diaryIdx ORDER BY adjectiveCategoryIdx ASC")
+    fun getDiaryCategories(diaryIdx: Int): List<DiaryEmotionCategory>
+
+    @Query("SELECT * FROM DiaryEmotionDetail WHERE diaryIdx = :diaryIdx ORDER BY adjectiveCategoryIdx ASC")
+    fun getDiaryAdjectives(diaryIdx: Int): List<DiaryEmotionDetail>
+
 //    @Query("SELECT diaryIdx, diaryComment, diaryDate, diaryCategoryIdx, diaryEmotionIdx FROM Diary" +
 //            "    LEFT JOIN DiaryEmotionCategory ON DiaryEmotionCategory.diaryIdx = Diary.diaryIdx" +
 //            "    LEFT JOIN DiaryEmotionDetail ON DiaryEmotionDetail.diaryIdx = Diary.diaryIdx" +

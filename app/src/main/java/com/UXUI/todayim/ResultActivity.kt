@@ -28,6 +28,7 @@ class ResultActivity: BaseActivity() {
     private val binding get() = mBinding!!
 
     private lateinit var roomDatabase: DiaryDatabase
+    private val gson = Gson()
 
     private val progressBarInterval = 100/TEST_REPEAT_NUM
 
@@ -40,7 +41,11 @@ class ResultActivity: BaseActivity() {
 
         setInitialize()
 
-        getDataFromTest()
+        if(intent.getStringExtra("categoryResult").isNullOrEmpty()) {
+            getDiaryFromDB()
+        } else {
+            getDataFromTest()
+        }
 
         setResultProgressbar()
     }
@@ -63,6 +68,7 @@ class ResultActivity: BaseActivity() {
 
     private fun setResultProgressbar() {
         var i = 0
+
         while (i < categoryResult.size) {
             val layoutInflater = this.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
             val categoryProgress = layoutInflater.inflate(R.layout.layout_result_progressbar, null)
@@ -70,7 +76,7 @@ class ResultActivity: BaseActivity() {
             categoryProgress.findViewById<TextView>(R.id.layout_result_category_tv).text =
                 categoryResult[i].adjectiveCategoryName
 
-            categoryProgress.findViewById<ProgressBar>(R.id.layout_result_progressbar).progress = progressBarInterval.toInt()
+            categoryProgress.findViewById<ProgressBar>(R.id.layout_result_progressbar).progress = adjectiveNum[i] * (progressBarInterval.toInt())
 
             binding.resultProgressBarLayout.addView(categoryProgress)
 
@@ -78,8 +84,24 @@ class ResultActivity: BaseActivity() {
         }
     }
 
+    private fun getDiaryFromDB() {
+
+        if( intent.getStringExtra("diaryInfo").isNullOrEmpty() ) return
+
+        val nowDiary: Diary = gson.fromJson(
+            intent.getStringExtra("diaryInfo"),
+            Diary::class.java
+        )
+
+        binding.resultContentEt.setText(nowDiary.diaryComment)
+
+        val diaryIdx = nowDiary.diaryIdx
+        categoryResult = roomDatabase.diaryDao().getDiaryCategories(diaryIdx)
+        adjectiveResult = roomDatabase.diaryDao().getDiaryAdjectives(diaryIdx)
+        adjectiveNum = countAdjectiveResult(adjectiveResult)
+    }
+
     private fun getDataFromTest() {
-        val gson: Gson = Gson()
         val rawAdjectiveResult = gson.fromJson(
             intent.getStringExtra("adjectiveResult"),
             Array<DiaryEmotionDetail>::class.java
@@ -137,17 +159,18 @@ class ResultActivity: BaseActivity() {
 //                }
 
                 // 일기 데이터 생성
-                var diaryIdx = 0
+                var diaryIdx: Int =0
                 val diaryDate = SimpleDateFormat("yyyy-MM-dd").format(Date())
 
                 val diaryInfo = if (binding.resultContentEt.text.isEmpty()) {
-                    Diary( diaryDate = diaryDate )
-                } else {
-                    Diary(
-                        diaryComment = binding.resultContentEt.text.toString(),
-                        diaryDate = diaryDate
-                    )
+                        Diary( diaryDate = diaryDate )
+                    } else {
+                        Diary(
+                            diaryComment = binding.resultContentEt.text.toString(),
+                            diaryDate = diaryDate
+                        )
                 }
+
                 roomDatabase.diaryDao().insertDiaryData(diaryInfo)
                 diaryIdx = roomDatabase.diaryDao().getDiaryIdx(diaryDate)
 
@@ -161,9 +184,13 @@ class ResultActivity: BaseActivity() {
                     i++
                 }
                 i=0
+                Log.d("ResultActivity>>>", "adjectiveResult : $adjectiveResult")
                 while( i < adjectiveResult.size ) {
                     adjectiveResult[i].diaryIdx = diaryIdx
+
+                    if(i>= adjectiveResult.size) break
                     CoroutineScope(Dispatchers.IO).launch {
+                        Log.d("ResultActivity>>>", "adjectiveResult[$i] : ${adjectiveResult[i]}")
                         roomDatabase.diaryDao().insertDiaryEmotionDetail(adjectiveResult[i])
                     }
                     i++
