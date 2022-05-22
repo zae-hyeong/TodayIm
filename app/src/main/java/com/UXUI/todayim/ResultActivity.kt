@@ -79,7 +79,6 @@ class ResultActivity: BaseActivity() {
             categoryProgress.findViewById<TextView>(R.id.layout_result_category_tv).text =
                 categoryResult[i].adjectiveCategoryName
 
-            Log.d("ResultActivity>>>", "adjectiveNum[$i] : ${adjectiveNum[i]}")
             categoryProgress.findViewById<ProgressBar>(R.id.layout_result_progressbar).progress = adjectiveNum[i] * (progressBarInterval.toInt())
 
             binding.resultProgressBarLayout.addView(categoryProgress)
@@ -96,7 +95,7 @@ class ResultActivity: BaseActivity() {
             intent.getStringExtra("diaryInfo"),
             Diary::class.java
         )
-        Log.d("ResultActivity>>>", "nowDiary : $nowDiary")
+        Log.d("ResultA>>>", "[nowDiary] : $nowDiary")
 
         binding.resultContentEt.setText(nowDiary.diaryComment)
 
@@ -112,24 +111,19 @@ class ResultActivity: BaseActivity() {
             intent.getStringExtra("adjectiveResult"),
             Array<DiaryEmotionDetail>::class.java
         )
-        Log.d("rawAdjectiveResult", rawAdjectiveResult.toString())
 
         val rawCategoryResult = gson.fromJson(
             intent.getStringExtra("categoryResult"),
             Array<DiaryEmotionCategory>::class.java
         )
-        Log.d("rawCategoryResult", rawCategoryResult.toString())
 
         val comparator1: Comparator<DiaryEmotionDetail> = compareBy { it.adjectiveCategoryIdx }
         adjectiveResult = rawAdjectiveResult.sortedWith(comparator1)
-        Log.d("ResultActivity", "adjectiveResult : $adjectiveResult")
 
         adjectiveNum = countAdjectiveResult(adjectiveResult)
-        Log.d("adjectiveNum", "adjectiveResult : $adjectiveNum")
 
         val comparator2: Comparator<DiaryEmotionCategory> = compareBy { it.adjectiveCategoryIdx }
         categoryResult = rawCategoryResult.sortedWith(comparator2)
-        Log.d("ResultActivity", "categoryResult : $categoryResult")
     }
 
     private fun countAdjectiveResult(adjectiveResult: List<DiaryEmotionDetail>): ArrayList<Int>{
@@ -183,27 +177,28 @@ class ResultActivity: BaseActivity() {
                 roomDatabase.diaryDao().insertDiaryData(diaryInfo)
                 diaryIdx = roomDatabase.diaryDao().getDiaryIdx(diaryDate)
 
-                var i = 0
                 // 코루틴을 활용하여 비동기 스레드 에서 DB Insert
                 CoroutineScope(Dispatchers.IO).launch {
+                    Log.d("ResultA>>>", "[Insert DB categoryResult] : $categoryResult")
+                    var i = 0
                     while( i < categoryResult.size ) {
                         categoryResult[i].diaryIdx = diaryIdx
+                        Log.d("ResultA>>>", "[Insert DB categoryResult[$i]] : ${categoryResult[i]}")
                         roomDatabase.diaryDao().insertDiaryEmotionCategory(categoryResult[i])
                         i++
                     }
                 }
 
-                var j = 0
                 CoroutineScope(Dispatchers.IO).launch {
-                    Log.d("ResultActivity>>>", "adjectiveResult : $adjectiveResult")
+                    Log.d("ResultA>>>", "[Insert DB adjectiveResult] : $adjectiveResult")
+                    var j = 0
                     while( j < adjectiveResult.size ) {
                         adjectiveResult[j].diaryIdx = diaryIdx
 
-                        Log.d("ResultActivity>>>", "adjectiveResult[$j] : ${adjectiveResult[j]}")
-                        roomDatabase.diaryDao().insertDiaryEmotionDetail(adjectiveResult[i])
+                        Log.d("ResultA>>>", "[Insert DB adjectiveResult[$j]] : ${adjectiveResult[j]}")
+                        roomDatabase.diaryDao().insertDiaryEmotionDetail(adjectiveResult[j])
                         j++
                     }
-
                 }
 
                 // Toast 메시지는 UI 처리이므로 UI 쓰레드에서 별도로 돌림.
