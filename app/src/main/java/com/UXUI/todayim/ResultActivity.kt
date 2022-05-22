@@ -41,11 +41,14 @@ class ResultActivity: BaseActivity() {
 
         setInitialize()
 
-        if(intent.getStringExtra("categoryResult").isNullOrEmpty()) {
-            getDiaryFromDB()
-        } else {
+        if(intent.getStringExtra("diaryInfo").isNullOrEmpty()) {
             getDataFromTest()
+        } else {
+            getDiaryFromDB()
         }
+        Log.d("ResultActivity>>>", "categoryResult : $categoryResult")
+        Log.d("ResultActivity>>>", "adjectiveResult : $adjectiveResult")
+        Log.d("ResultActivity>>>", "adjectiveNum : $adjectiveNum")
 
         setResultProgressbar()
     }
@@ -69,13 +72,14 @@ class ResultActivity: BaseActivity() {
     private fun setResultProgressbar() {
         var i = 0
 
-        while (i < categoryResult.size) {
+        while ( i < categoryResult.size ) {
             val layoutInflater = this.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
             val categoryProgress = layoutInflater.inflate(R.layout.layout_result_progressbar, null)
 
             categoryProgress.findViewById<TextView>(R.id.layout_result_category_tv).text =
                 categoryResult[i].adjectiveCategoryName
 
+            Log.d("ResultActivity>>>", "adjectiveNum[$i] : ${adjectiveNum[i]}")
             categoryProgress.findViewById<ProgressBar>(R.id.layout_result_progressbar).progress = adjectiveNum[i] * (progressBarInterval.toInt())
 
             binding.resultProgressBarLayout.addView(categoryProgress)
@@ -92,13 +96,15 @@ class ResultActivity: BaseActivity() {
             intent.getStringExtra("diaryInfo"),
             Diary::class.java
         )
+        Log.d("ResultActivity>>>", "nowDiary : $nowDiary")
 
         binding.resultContentEt.setText(nowDiary.diaryComment)
 
         val diaryIdx = nowDiary.diaryIdx
         categoryResult = roomDatabase.diaryDao().getDiaryCategories(diaryIdx)
         adjectiveResult = roomDatabase.diaryDao().getDiaryAdjectives(diaryIdx)
-        adjectiveNum = countAdjectiveResult(adjectiveResult)
+        adjectiveNum = roomDatabase.diaryDao().getCategoryAdjectiveNum(diaryIdx)
+//        adjectiveNum = countAdjectiveResult(adjectiveResult)
     }
 
     private fun getDataFromTest() {
@@ -157,43 +163,47 @@ class ResultActivity: BaseActivity() {
 //                    Toast.makeText(binding.root.context, "입력 값이 비어있습니다", Toast.LENGTH_SHORT).show()
 //                    return
 //                }
+                //todo 이미 일기 데이터가 있는 경우의 처리 필요
+                //todo 1. 덮어쓰겠습니까? 2. 자동으로 삭제+ 업데이트
 
                 // 일기 데이터 생성
                 var diaryIdx: Int =0
                 val diaryDate = SimpleDateFormat("yyyy-MM-dd").format(Date())
 
-                val diaryInfo = if (binding.resultContentEt.text.isEmpty()) {
+                val diaryInfo =
+                    if (binding.resultContentEt.text.isEmpty()) {
                         Diary( diaryDate = diaryDate )
                     } else {
                         Diary(
                             diaryComment = binding.resultContentEt.text.toString(),
                             diaryDate = diaryDate
                         )
-                }
+                    }
 
                 roomDatabase.diaryDao().insertDiaryData(diaryInfo)
                 diaryIdx = roomDatabase.diaryDao().getDiaryIdx(diaryDate)
 
                 var i = 0
-                while( i < categoryResult.size ) {
-                    categoryResult[i].diaryIdx = diaryIdx
-                    // 코루틴을 활용하여 비동기 스레드 에서 DB Insert
-                    CoroutineScope(Dispatchers.IO).launch {
+                // 코루틴을 활용하여 비동기 스레드 에서 DB Insert
+                CoroutineScope(Dispatchers.IO).launch {
+                    while( i < categoryResult.size ) {
+                        categoryResult[i].diaryIdx = diaryIdx
                         roomDatabase.diaryDao().insertDiaryEmotionCategory(categoryResult[i])
+                        i++
                     }
-                    i++
                 }
-                i=0
-                Log.d("ResultActivity>>>", "adjectiveResult : $adjectiveResult")
-                while( i < adjectiveResult.size ) {
-                    adjectiveResult[i].diaryIdx = diaryIdx
 
-                    if(i>= adjectiveResult.size) break
-                    CoroutineScope(Dispatchers.IO).launch {
-                        Log.d("ResultActivity>>>", "adjectiveResult[$i] : ${adjectiveResult[i]}")
+                var j = 0
+                CoroutineScope(Dispatchers.IO).launch {
+                    Log.d("ResultActivity>>>", "adjectiveResult : $adjectiveResult")
+                    while( j < adjectiveResult.size ) {
+                        adjectiveResult[j].diaryIdx = diaryIdx
+
+                        Log.d("ResultActivity>>>", "adjectiveResult[$j] : ${adjectiveResult[j]}")
                         roomDatabase.diaryDao().insertDiaryEmotionDetail(adjectiveResult[i])
+                        j++
                     }
-                    i++
+
                 }
 
                 // Toast 메시지는 UI 처리이므로 UI 쓰레드에서 별도로 돌림.
