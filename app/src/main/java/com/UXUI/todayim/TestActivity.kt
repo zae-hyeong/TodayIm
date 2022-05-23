@@ -22,6 +22,10 @@ class TestActivity: BaseActivity() {
     private lateinit var choiceArray: List<EmotionAdjective>
     private lateinit var emotionAdjectiveDB: EmotionAdjectiveDatabase
 
+    progressBar2.max =250
+    progressBar2.progress = 100
+
+
     private val adjectiveResult= ArrayList<DiaryEmotionDetail>()
     private val categoryResult= ArrayList<DiaryEmotionCategory>()
 
@@ -124,32 +128,6 @@ class TestActivity: BaseActivity() {
         intent.putExtra("adjectiveResult", gson.toJson(adjectiveResult))
         startActivity(intent)
         finish()
-    }
-}
-
-class CustomCircleBarView: View {
-    // 생성자
-    constructor(context: Context?) : super(context)
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
-
-    // 원형 프로그레스바 그리기
-    override fun onDraw(canvas: Canvas?) {
-        super.onDraw(canvas)
-
-        // Paint 객체 생성
-        val paint = Paint()
-
-        // 1. 회색 원(배경)그리기
-        paint.color = Color.GRAY
-        paint.style = Paint.Style.STROKE
-        paint.strokeWidth = 40f
-        // 0도에서 시작하는 360도의 호를 그린다.
-        canvas?.drawArc(200f, 200f, 700f, 700f, 0f, 360f, false, paint)
-
-        // 2. 파란 원(프로그레스) 그리기
-        paint.color = Color.BLUE
-        // -90도에서 시작하는 180도의 호를 그린다.
-        canvas?.drawArc(200f, 200f, 700f, 700f, -90f, 180f, false, paint)
     }
 }
 
