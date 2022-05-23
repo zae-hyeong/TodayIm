@@ -2,10 +2,10 @@
     <string name="app_name">TodayIm</string>
 
     //navigation title
-    <string name="title_home">Home</string>
-    <string name="title_listView">List</string>
-    <string name="title_calendarView">Calendar</string>
-    <string name="title_version">Version</string>
+    <string name="title_home">검사 홈</string>
+    <string name="title_listView">리스트 보기</string>
+    <string name="title_calendarView">달력 보기</string>
+    <string name="title_version">문의 사항</string>
 
     //base_dialog
     <string name="dialog_base_ok">확인</string>
