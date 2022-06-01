@@ -30,7 +30,7 @@ class ResultActivity: BaseActivity() {
     private lateinit var roomDatabase: DiaryDatabase
     private val gson = Gson()
 
-    private val progressBarInterval = 100/TEST_REPEAT_NUM
+    private val progressBarInterval: Float = 100F/(TEST_REPEAT_NUM.toFloat())
 
     private lateinit var adjectiveResult: List<DiaryEmotionDetail>
     private lateinit var adjectiveNum: List<Int>
@@ -72,14 +72,22 @@ class ResultActivity: BaseActivity() {
     private fun setResultProgressbar() {
         var i = 0
 
+        var percentage: Float = 0F
+
         while ( i < categoryResult.size ) {
             val layoutInflater = this.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
             val categoryProgress = layoutInflater.inflate(R.layout.layout_result_progressbar, null)
 
+            percentage = adjectiveNum[i] * progressBarInterval
+
             categoryProgress.findViewById<TextView>(R.id.layout_result_category_tv).text =
                 categoryResult[i].adjectiveCategoryName
 
-            categoryProgress.findViewById<ProgressBar>(R.id.layout_result_progressbar).progress = adjectiveNum[i] * (progressBarInterval.toInt())
+            categoryProgress.findViewById<ProgressBar>(R.id.layout_result_progressbar)
+                .progress = percentage.toInt()
+
+            categoryProgress.findViewById<TextView>(R.id.layout_result_percentage_tv)
+                .text =  String.format("%.1f%%", percentage)
 
             binding.resultProgressBarLayout.addView(categoryProgress)
 
