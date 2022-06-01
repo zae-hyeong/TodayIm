@@ -1,7 +1,12 @@
 package com.UXUI.todayim
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
 import android.os.Bundle
+import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -119,5 +124,29 @@ class TestActivity: BaseActivity() {
         intent.putExtra("adjectiveResult", gson.toJson(adjectiveResult))
         startActivity(intent)
         finish()
+    }
+}
+
+class CustomCircleBarView: View {
+    constructor(context: Context?) : super(context)
+    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
+
+    override fun onDraw(canvas: Canvas?) {
+        super.onDraw(canvas)
+        // Paint 객체 생성
+        val paint = Paint()
+
+        // 1. 회색 원(배경)그리기
+        paint.color = Color.GRAY
+        paint.style = Paint.Style.STROKE
+        paint.strokeWidth = 40f // 0도에서 시작하는 360도의 호를 그린다.
+
+        canvas?.drawArc(200f, 200f, 700f, 700f, 0f, 360f, false, paint)
+
+        // 2. 파란 원(프로그레스) 그리기
+        paint.color = Color.BLUE
+
+        // -90도에서 시작하는 180도의 호를 그린다.
+        canvas?.drawArc(200f, 200f, 700f, 700f, -90f, 180f, false, paint)
     }
 }
