@@ -22,4 +22,14 @@
     <string name="calendar_modify">수정</string>
     <string name="calendar_delete">삭제</string>
 
+    //emoji
+    <string name="emoji_happy">😀</string>
+    <string name="emoji_comfortable">🙂</string>
+    <string name="emoji_pain">🤕</string>
+    <string name="emoji_sad">😥</string>
+    <string name="emoji_scary">🤕</string>
+    <string name="emoji_hate">😡</string>
+    <string name="emoji_angry">😟</string>
+
+
 </resources>
