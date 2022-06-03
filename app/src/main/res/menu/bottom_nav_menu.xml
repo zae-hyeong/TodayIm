@@ -12,13 +12,13 @@
 <!--        android:title="@string/title_calendarView" />-->
 
     <item
-        android:id="@+id/navigation_listView"
+        android:id="@+id/navigation_record"
         android:icon="@drawable/ic_list_img"
-        android:title="@string/title_listView" />
+        android:title="@string/title_record" />
 
     <item
-        android:id="@+id/navigation_version"
+        android:id="@+id/navigation_analyze"
         android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/title_version" />
+        android:title="@string/title_analyze" />
 
 </menu>

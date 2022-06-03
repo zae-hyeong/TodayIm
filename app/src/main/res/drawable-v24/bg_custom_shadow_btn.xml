@@ -2,114 +2,125 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <!-- Drop Shadow Stack -->
-    <item>
-        <shape>
-            <padding
-                android:bottom="2.5dp"
-                android:left="2.5dp"
-                android:right="2.5dp"
-                android:top="2.5dp" />
+<!--    <item>-->
+<!--        <shape>-->
+<!--            <padding-->
+<!--                android:bottom="2.5dp"-->
+<!--                android:left="2.5dp"-->
+<!--                android:right="2.5dp"-->
+<!--                android:top="2.5dp" />-->
 
-            <solid android:color="@color/point01" />
-        </shape>
-    </item>
-    <item>
-        <shape>
-            <padding
-                android:bottom="2.5dp"
-                android:left="2.5dp"
-                android:right="2.5dp"
-                android:top="2.5dp" />
+<!--            <solid android:color="@color/point01" />-->
+<!--            <corners-->
+<!--                android:radius="15dp"/>-->
+<!--        </shape>-->
+<!--    </item>-->
+<!--    <item>-->
+<!--        <shape>-->
+<!--            <padding-->
+<!--                android:bottom="2.5dp"-->
+<!--                android:left="2.5dp"-->
+<!--                android:right="2.5dp"-->
+<!--                android:top="2.5dp" />-->
 
-            <solid android:color="@color/point02" />
-        </shape>
-    </item>
-    <item>
-        <shape>
-            <padding
-                android:bottom="2.5dp"
-                android:left="2.5dp"
-                android:right="2.5dp"
-                android:top="2.5dp" />
+<!--            <solid android:color="@color/point02" />-->
+<!--            <corners-->
+<!--                android:radius="15dp"/>-->
+<!--        </shape>-->
+<!--    </item>-->
+<!--    <item>-->
+<!--        <shape>-->
+<!--            <padding-->
+<!--                android:bottom="2.5dp"-->
+<!--                android:left="2.5dp"-->
+<!--                android:right="2.5dp"-->
+<!--                android:top="2.5dp" />-->
 
-            <solid android:color="@color/point03" />
-        </shape>
-    </item>
-    <item>
-        <shape>
-            <padding
-                android:bottom="2.5dp"
-                android:left="2.5dp"
-                android:right="2.5dp"
-                android:top="2.5dp" />
+<!--            <solid android:color="@color/point03" />-->
+<!--            <corners-->
+<!--                android:radius="15dp"/>-->
+<!--        </shape>-->
+<!--    </item>-->
+<!--    <item>-->
+<!--        <shape>-->
+<!--            <padding-->
+<!--                android:bottom="2.5dp"-->
+<!--                android:left="2.5dp"-->
+<!--                android:right="2.5dp"-->
+<!--                android:top="2.5dp" />-->
 
-            <solid android:color="@color/point04" />
-        </shape>
-    </item>
-    <item>
-        <shape>
-            <padding
-                android:bottom="2.5dp"
-                android:left="2.5dp"
-                android:right="2.5dp"
-                android:top="2.5dp" />
+<!--            <solid android:color="@color/point04" />-->
+<!--            <corners-->
+<!--                android:radius="15dp"/>-->
+<!--        </shape>-->
+<!--    </item>-->
+<!--    <item>-->
+<!--        <shape>-->
+<!--            <padding-->
+<!--                android:bottom="2.5dp"-->
+<!--                android:left="2.5dp"-->
+<!--                android:right="2.5dp"-->
+<!--                android:top="2.5dp" />-->
 
-            <solid android:color="@color/point05" />
-        </shape>
-    </item>
+<!--            <solid android:color="@color/point05" />-->
+<!--            <corners-->
+<!--                android:radius="15dp"/>-->
+<!--        </shape>-->
+<!--    </item>-->
     <item>
         <shape>
             <padding
-                android:bottom="2.5dp"
-                android:left="2.5dp"
-                android:right="2.5dp"
-                android:top="2.5dp" />
+                android:bottom="1.5dp"
+                android:right="1.5dp" />
 
             <solid android:color="@color/point06" />
+            <corners
+                android:radius="15dp"/>
         </shape>
     </item>
     <item>
         <shape>
             <padding
-                android:bottom="2.5dp"
-                android:left="2.5dp"
-                android:right="2.5dp"
-                android:top="2.5dp" />
+                android:bottom="1.5dp"
+                android:right="1.5dp"/>
 
             <solid android:color="@color/point07" />
+            <corners
+                android:radius="15dp"/>
         </shape>
     </item>
     <item>
         <shape>
             <padding
-                android:bottom="2.5dp"
-                android:left="2.5dp"
-                android:right="2.5dp"
-                android:top="2.5dp" />
+                android:bottom="1.5dp"
+                android:right="1.5dp" />
 
             <solid android:color="@color/point08" />
+            <corners
+                android:radius="15dp"/>
         </shape>
     </item>
     <item>
         <shape>
             <padding
-                android:bottom="2.5dp"
-                android:left="2.5dp"
-                android:right="2.5dp"
-                android:top="2.5dp" />
+                android:bottom="1.5dp"
+                android:right="1.5dp" />
 
             <solid android:color="@color/point09" />
+            <corners
+                android:radius="15dp"/>
         </shape>
     </item>
     <item>
         <shape>
             <padding
-                android:bottom="2.5dp"
-                android:left="2.5dp"
-                android:right="2.5dp"
-                android:top="2.5dp" />
+                android:bottom="1.5dp"
+                android:right="1.5dp"
+                />
 
             <solid android:color="@color/point10" />
+            <corners
+                android:radius="15dp"/>
         </shape>
     </item>
 
@@ -120,6 +131,8 @@
             <size
                 android:width="150dp"
                 android:height="100dp" />
+            <corners
+                android:radius="15dp"/>
         </shape>
     </item>
 

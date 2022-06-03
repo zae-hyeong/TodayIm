@@ -18,14 +18,14 @@
 <!--        tools:layout="@layout/fragment_view_calendar" />-->
 
     <fragment
-        android:id="@+id/navigation_listView"
+        android:id="@+id/navigation_record"
         android:name="com.UXUI.todayim.ui.record.RecordFragment"
-        android:label="@string/title_listView"
+        android:label="@string/title_record"
         tools:layout="@layout/fragment_view_list" />
 
     <fragment
-        android:id="@+id/navigation_version"
+        android:id="@+id/navigation_analyze"
         android:name="com.UXUI.todayim.ui.analyze.AnalyzeFragment"
-        android:label="@string/title_version"
+        android:label="@string/title_analyze"
         tools:layout="@layout/fragment_analyze" />
 </navigation>
