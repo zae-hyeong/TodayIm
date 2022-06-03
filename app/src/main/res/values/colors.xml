@@ -10,7 +10,25 @@
     <color name="gray">#FFDFDFDF</color>
 
     //main colors
-    <color name="main">#FF343E4D</color>
-    <color name="sub">#FF3E628F</color>
+    <color name="main">#FF1B262C</color>
+    <color name="sub">#FF0F4C75</color>
+
+    <color name="point">#FF00F0FF</color>
+
+    <color name="paper">#FFE7F0EE</color>
+
+    //custom shadow
+    <color name="point01">#0000F0FF</color>
+    <color name="point02">#0600F0FF</color>
+    <color name="point03">#0900F0FF</color>
+    <color name="point04">#0B00F0FF</color>
+    <color name="point05">#0D00F0FF</color>
+    <color name="point06">#1000F0FF</color>
+    <color name="point07">#1200F0FF</color>
+    <color name="point08">#1500F0FF</color>
+    <color name="point09">#1700F0FF</color>
+    <color name="point10">#1A00F0FF</color>
+
+
 
 </resources>

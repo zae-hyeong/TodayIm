@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -15,7 +14,7 @@ import com.UXUI.todayim.ResultActivity
 import com.UXUI.todayim.database.Diary
 import com.UXUI.todayim.database.DiaryDatabase
 import com.UXUI.todayim.databinding.FragmentViewCalendarBinding
-import com.UXUI.todayim.ui.version.VersionViewModel
+import com.UXUI.todayim.ui.analyze.AnalyzeViewModel
 import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import com.google.gson.Gson
@@ -44,7 +43,7 @@ class CalendarViewFragment : Fragment(), View.OnClickListener, OnDayClickListene
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel = ViewModelProvider(this).get(VersionViewModel::class.java)
+        val dashboardViewModel = ViewModelProvider(this).get(AnalyzeViewModel::class.java)
 
         _binding = FragmentViewCalendarBinding.inflate(inflater, container, false)
 
@@ -105,6 +104,7 @@ class CalendarViewFragment : Fragment(), View.OnClickListener, OnDayClickListene
                     binding.btnModify.visibility = View.INVISIBLE
                     binding.btnRemove.visibility = View.INVISIBLE
                     binding.btnDetail.visibility = View.INVISIBLE
+                    binding.etContent.visibility = View.INVISIBLE
                     binding.tvClickDate.text = ""
                     with(binding) { etContent.setText("") }
                 }
@@ -115,6 +115,7 @@ class CalendarViewFragment : Fragment(), View.OnClickListener, OnDayClickListene
                 binding.btnModify.visibility = View.VISIBLE
                 binding.btnRemove.visibility = View.VISIBLE
                 binding.btnDetail.visibility = View.VISIBLE
+                binding.etContent.visibility = View.VISIBLE
                 binding.tvClickDate.text = clickDiaryItem!!.diaryDate
                 binding.etContent.setText(clickDiaryItem!!.diaryComment)
             }

@@ -30,7 +30,7 @@ class ResultActivity: BaseActivity() {
     private lateinit var roomDatabase: DiaryDatabase
     private val gson = Gson()
 
-    private val progressBarInterval = 100/TEST_REPEAT_NUM
+    private val progressBarInterval: Float = 100F/(TEST_REPEAT_NUM.toFloat())
 
     private lateinit var adjectiveResult: List<DiaryEmotionDetail>
     private lateinit var adjectiveNum: List<Int>
@@ -58,6 +58,68 @@ class ResultActivity: BaseActivity() {
         super.onDestroy()
     }
 
+    @SuppressLint("SimpleDateFormat")
+    override fun onClick(v: View?) {
+        when (v!!.id) {
+            R.id.btn_complete-> { // 완료 버튼 클릭
+                // 유효성 검사 (빈 입력필드)
+//                if (binding.resultContentEt.text.isEmpty()) {
+//                    Toast.makeText(binding.root.context, "입력 값이 비어있습니다", Toast.LENGTH_SHORT).show()
+//                    return
+//                }
+                //todo 이미 일기 데이터가 있는 경우의 처리 필요
+                //todo 1. 덮어쓰겠습니까? 2. 자동으로 삭제+ 업데이트
+
+                // 일기 데이터 생성
+                var diaryIdx: Int =0
+                val diaryDate = SimpleDateFormat("yyyy-MM-dd").format(Date())
+//                val diaryDate = "2022-05-10"
+
+                val diaryInfo =
+                    if (binding.resultContentEt.text.isEmpty()) {
+                        Diary( diaryDate = diaryDate )
+                    } else {
+                        Diary(
+                            diaryComment = binding.resultContentEt.text.toString(),
+                            diaryDate = diaryDate
+                        )
+                    }
+
+                roomDatabase.diaryDao().insertDiaryData(diaryInfo)
+                diaryIdx = roomDatabase.diaryDao().getDiaryIdx(diaryDate)
+
+                // 코루틴을 활용하여 비동기 스레드 에서 DB Insert
+                CoroutineScope(Dispatchers.IO).launch {
+                    Log.d("ResultA>>>", "[Insert DB categoryResult] : $categoryResult")
+                    var i = 0
+                    while( i < categoryResult.size ) {
+                        categoryResult[i].diaryIdx = diaryIdx
+                        Log.d("ResultA>>>", "[Insert DB categoryResult[$i]] : ${categoryResult[i]}")
+                        roomDatabase.diaryDao().insertDiaryEmotionCategory(categoryResult[i])
+                        i++
+                    }
+                }
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    Log.d("ResultA>>>", "[Insert DB adjectiveResult] : $adjectiveResult")
+                    var j = 0
+                    while( j < adjectiveResult.size ) {
+                        adjectiveResult[j].diaryIdx = diaryIdx
+
+                        Log.d("ResultA>>>", "[Insert DB adjectiveResult[$j]] : ${adjectiveResult[j]}")
+                        roomDatabase.diaryDao().insertDiaryEmotionDetail(adjectiveResult[j])
+                        j++
+                    }
+                }
+
+                // Toast 메시지는 UI 처리이므로 UI 쓰레드에서 별도로 돌림.
+                runOnUiThread { Toast.makeText(binding.root.context, "일기 작성이 완료 되었습니다", Toast.LENGTH_SHORT).show() }
+                // 액티비티 종료
+                finish()
+            }
+        }
+    }
+
     private fun setInitialize() {
         // 뷰 바인딩 구성
         mBinding = ActivityResultBinding.inflate(layoutInflater)
@@ -72,14 +134,22 @@ class ResultActivity: BaseActivity() {
     private fun setResultProgressbar() {
         var i = 0
 
+        var percentage: Float = 0F
+
         while ( i < categoryResult.size ) {
             val layoutInflater = this.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
             val categoryProgress = layoutInflater.inflate(R.layout.layout_result_progressbar, null)
 
+            percentage = adjectiveNum[i] * progressBarInterval
+
             categoryProgress.findViewById<TextView>(R.id.layout_result_category_tv).text =
                 categoryResult[i].adjectiveCategoryName
 
-            categoryProgress.findViewById<ProgressBar>(R.id.layout_result_progressbar).progress = adjectiveNum[i] * (progressBarInterval.toInt())
+            categoryProgress.findViewById<ProgressBar>(R.id.layout_result_progressbar)
+                .progress = percentage.toInt()
+
+            categoryProgress.findViewById<TextView>(R.id.layout_result_percentage_tv)
+                .text =  String.format("%.1f%%", percentage)
 
             binding.resultProgressBarLayout.addView(categoryProgress)
 
@@ -146,66 +216,5 @@ class ResultActivity: BaseActivity() {
         }
         adjectiveNum.add(count)
         return adjectiveNum
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    override fun onClick(v: View?) {
-        when (v!!.id) {
-            R.id.btn_complete-> { // 완료 버튼 클릭
-                // 유효성 검사 (빈 입력필드)
-//                if (binding.resultContentEt.text.isEmpty()) {
-//                    Toast.makeText(binding.root.context, "입력 값이 비어있습니다", Toast.LENGTH_SHORT).show()
-//                    return
-//                }
-                //todo 이미 일기 데이터가 있는 경우의 처리 필요
-                //todo 1. 덮어쓰겠습니까? 2. 자동으로 삭제+ 업데이트
-
-                // 일기 데이터 생성
-                var diaryIdx: Int =0
-                val diaryDate = SimpleDateFormat("yyyy-MM-dd").format(Date())
-
-                val diaryInfo =
-                    if (binding.resultContentEt.text.isEmpty()) {
-                        Diary( diaryDate = diaryDate )
-                    } else {
-                        Diary(
-                            diaryComment = binding.resultContentEt.text.toString(),
-                            diaryDate = diaryDate
-                        )
-                    }
-
-                roomDatabase.diaryDao().insertDiaryData(diaryInfo)
-                diaryIdx = roomDatabase.diaryDao().getDiaryIdx(diaryDate)
-
-                // 코루틴을 활용하여 비동기 스레드 에서 DB Insert
-                CoroutineScope(Dispatchers.IO).launch {
-                    Log.d("ResultA>>>", "[Insert DB categoryResult] : $categoryResult")
-                    var i = 0
-                    while( i < categoryResult.size ) {
-                        categoryResult[i].diaryIdx = diaryIdx
-                        Log.d("ResultA>>>", "[Insert DB categoryResult[$i]] : ${categoryResult[i]}")
-                        roomDatabase.diaryDao().insertDiaryEmotionCategory(categoryResult[i])
-                        i++
-                    }
-                }
-
-                CoroutineScope(Dispatchers.IO).launch {
-                    Log.d("ResultA>>>", "[Insert DB adjectiveResult] : $adjectiveResult")
-                    var j = 0
-                    while( j < adjectiveResult.size ) {
-                        adjectiveResult[j].diaryIdx = diaryIdx
-
-                        Log.d("ResultA>>>", "[Insert DB adjectiveResult[$j]] : ${adjectiveResult[j]}")
-                        roomDatabase.diaryDao().insertDiaryEmotionDetail(adjectiveResult[j])
-                        j++
-                    }
-                }
-
-                // Toast 메시지는 UI 처리이므로 UI 쓰레드에서 별도로 돌림.
-                runOnUiThread { Toast.makeText(binding.root.context, "일기 작성이 완료 되었습니다", Toast.LENGTH_SHORT).show() }
-                // 액티비티 종료
-                finish()
-            }
-        }
     }
 }
