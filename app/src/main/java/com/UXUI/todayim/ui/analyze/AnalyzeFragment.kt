@@ -27,19 +27,20 @@ class AnalyzeFragment : Fragment() {
     private lateinit var diaryDatabase: DiaryDatabase
     private lateinit var emotionDatabase: EmotionAdjectiveDatabase
 
-    private val progressBarInterval: Float = 100F/(TEST_REPEAT_NUM.toFloat())
+    private var progressBarInterval: Float = 100F/(TEST_REPEAT_NUM.toFloat())
 
     private var categories: List<EmotionAdjectiveCategory>? = null
     private var weeklyEmotion: IntArray? = null
 
     private var emojiArray = arrayOf(
-        getString(R.string.emoji_happy),
-        getString(R.string.emoji_comfortable),
-        getString(R.string.emoji_pain),
-        getString(R.string.emoji_sad),
-        getString(R.string.emoji_scary),
-        getString(R.string.emoji_hate),
-        getString(R.string.emoji_angry)
+//        getString(R.string.emoji_happy),
+//        getString(R.string.emoji_comfortable),
+//        getString(R.string.emoji_pain),
+//        getString(R.string.emoji_sad),
+//        getString(R.string.emoji_scary),
+//        getString(R.string.emoji_hate),
+//        getString(R.string.emoji_angry)
+        "😀", "🙂", "🤕", "😥", "🤕", "😡", "😟"
     )
 
     override fun onCreateView(
@@ -50,7 +51,8 @@ class AnalyzeFragment : Fragment() {
         setInitialize(inflater, container)
 
         categories = getCategoriesFromDB()
-        weeklyEmotion = getWeeklyEmotionFromDB()
+        weeklyEmotion = intArrayOf(8, 4, 2, 8, 9, 10, 4)//getWeeklyEmotionFromDB()
+        progressBarInterval = 100F/(weeklyEmotion!!.sum())
 
         setAnalyzeProgressbar()
 
@@ -118,13 +120,11 @@ class AnalyzeFragment : Fragment() {
     private fun setAnalyzeProgressbar() {
         var i = 0
 
-        var percentage: Float = 0F
-
         while ( i < weeklyEmotion!!.size ) {
             val layoutInflater = requireActivity().getSystemService(AppCompatActivity.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             val categoryProgress = layoutInflater.inflate(R.layout.layout_result_progressbar, null)
 
-            percentage = weeklyEmotion!![i] * progressBarInterval //todo 인터벌 값이 result랑은 다름 -> 변경 필요
+            val percentage = weeklyEmotion!![i] * progressBarInterval //todo 인터벌 값이 result랑은 다름 -> 변경 필요
 
             categoryProgress.findViewById<TextView>(R.id.layout_result_category_tv).text =
                 categories!![i].adjectiveCategoryName
@@ -139,17 +139,17 @@ class AnalyzeFragment : Fragment() {
 
             i++
         }
-        var max = weeklyEmotion!![0]
-        var maxIdx = 0
-        for(i in 0..weeklyEmotion!!.size) {
-            if (weeklyEmotion!![i] > max) {
-                max = weeklyEmotion!![i];
-                maxIdx = i
-            }
-        }
+//        var max = weeklyEmotion!![0]
+//        var maxIdx = 0
+//        for(i in 0..weeklyEmotion!!.size) {
+//            if (weeklyEmotion!![i] > max) {
+//                max = weeklyEmotion!![i];
+//                maxIdx = i
+//            }
+//        }
 
-        binding.analyzeEmojiTv.text = emojiArray[maxIdx]
+        binding.analyzeEmojiTv.text = emojiArray[6]
 
-        binding.analyzeEmotionNameTv.text = categories!![maxIdx].adjectiveCategoryName
+        binding.analyzeEmotionNameTv.text = categories!![6].adjectiveCategoryName
     }
 }

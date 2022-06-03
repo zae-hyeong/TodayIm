@@ -11,15 +11,15 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
-    <fragment
-        android:id="@+id/navigation_calendarView"
-        android:name="com.UXUI.todayim.ui.calendarView.CalendarViewFragment"
-        android:label="@string/title_calendarView"
-        tools:layout="@layout/fragment_view_calendar" />
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_calendarView"-->
+<!--        android:name="com.UXUI.todayim.ui.calendarView.CalendarViewFragment"-->
+<!--        android:label="@string/title_calendarView"-->
+<!--        tools:layout="@layout/fragment_view_calendar" />-->
 
     <fragment
         android:id="@+id/navigation_listView"
-        android:name="com.UXUI.todayim.ui.listView.ListViewFragment"
+        android:name="com.UXUI.todayim.ui.record.RecordFragment"
         android:label="@string/title_listView"
         tools:layout="@layout/fragment_view_list" />
 
