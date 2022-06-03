@@ -20,7 +20,7 @@
 
             android:text="한 주 동안 나는"
             android:textSize="24sp"
-            android:textColor="@color/sub"
+            android:textColor="@color/point"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             />
@@ -68,7 +68,7 @@
 
                 android:text="슬픔"
                 android:textSize="24sp"
-                android:textColor="@color/sub"
+                android:textColor="@color/point"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 />

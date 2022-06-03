@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ResultActivity">
+    tools:context=".ResultActivity"
+    android:background="@color/main">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -21,15 +22,15 @@
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/result_result"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="30sp"
-                android:layout_marginBottom="30dp"
-                />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/result_result"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="30sp"-->
+<!--                android:layout_marginBottom="30dp"-->
+<!--                />-->
 
         </LinearLayout>
 
@@ -42,8 +43,9 @@
             android:textStyle="bold"
             android:layout_marginBottom="16dp"
             android:textSize="18sp"
-            android:textColor="@color/black"
+            android:textColor="@color/point"
             android:layout_marginTop="40dp"
+            android:gravity="center"
             app:layout_constraintTop_toBottomOf="@id/result_progressBar_layout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -66,7 +68,7 @@
             android:scrollbars="vertical"
             android:scrollHorizontally="false"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000"
+            android:textColor="@color/main"
             android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@id/result_info_tv"
             app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:layout_gravity="end"
-            android:background="@drawable/bg_button_base"
+            android:background="@drawable/bg_custom_shadow_btn"
             android:text="완료"
             app:layout_constraintTop_toBottomOf="@id/result_content_et"
             app:layout_constraintEnd_toEndOf="@id/result_content_et"/>

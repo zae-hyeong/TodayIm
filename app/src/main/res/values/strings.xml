@@ -18,7 +18,7 @@
     <string name="home_test_start_ment">당신의 오늘은\n어땠나요</string>
     <string name="test_msg">오늘 나의 기분은 어떤가요?</string>
     <string name="result_result">검사 결과</string>
-    <string name="result_explain">오늘 하루를 기록해보세요.</string>
+    <string name="result_explain">작성하고 싶은\n코멘트가 있다면 남겨주세요</string>
     <string name="calendar_modify">수정</string>
     <string name="calendar_delete">삭제</string>
 

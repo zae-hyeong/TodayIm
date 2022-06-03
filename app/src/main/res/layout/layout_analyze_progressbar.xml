@@ -23,7 +23,7 @@
             android:gravity="center"
 
             android:text="100%"
-            android:textColor="@color/black"
+            android:textColor="@color/point"
             android:textSize="15sp"
             android:layout_marginEnd="8dp"/>
 
@@ -35,7 +35,7 @@
             android:layout_weight="1"
             android:rotation="270"
             android:layout_marginVertical="10dp"
-            android:progressTint="@color/main"
+            android:progressTint="@color/point"
             android:progress="50"
             android:scaleY="4" />
 
@@ -46,7 +46,7 @@
 
             android:gravity="center"
             android:text="괴로움"
-            android:textColor="@color/black"
+            android:textColor="@color/point"
             android:textSize="15sp" />
 
     </LinearLayout>
