@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment"
+    android:background="@color/main">
+
+<!--    <TextView-->
+<!--        android:id="@+id/home_main_tv"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textSize="20sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:foregroundGravity="center"
+        android:elevation="20dp"
+        >
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/home_start_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_test_start_ment"
+            android:textSize="20sp"
+            android:textColor="@color/point"
+            android:background="@drawable/bg_home_test_start_btn"
+            android:elevation="5dp"
+            />
+        <ProgressBar
+            android:id="@+id/home_start_pb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_home_circle_pb_bg"
+            android:visibility="gone"
+            android:progressDrawable="@drawable/bg_home_circle_pb"
+            android:indeterminate="false"
+            android:max="120"
+            android:progress="0"
+            />
+    </FrameLayout>
+
+    
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
