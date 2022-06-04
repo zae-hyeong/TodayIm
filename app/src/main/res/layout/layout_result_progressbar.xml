@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/main">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
@@ -22,7 +21,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="카테고리"
-            android:textColor="@color/point"
+            android:textColor="@color/black"
             android:textSize="15sp"
             android:layout_marginEnd="8dp"/>
 
@@ -33,21 +32,9 @@
             android:layout_height="20dp"
             android:layout_marginVertical="10dp"
             android:layout_weight="1"
-            android:progressTint="@color/point"
+            android:progressTint="@color/main"
             android:progress="50"
             android:scaleY="4" />
-
-        <TextView
-            android:id="@+id/layout_result_percentage_tv"
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_marginStart="5dp"
-
-            android:text="100%"
-            android:textColor="@color/point"
-            android:textSize="15sp"
-            android:layout_marginEnd="8dp"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

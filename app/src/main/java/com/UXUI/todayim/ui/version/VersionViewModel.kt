@@ -1,10 +1,10 @@
-package com.UXUI.todayim.ui.analyze
+package com.UXUI.todayim.ui.version
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class AnalyzeViewModel : ViewModel() {
+class VersionViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"

@@ -8,10 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.UXUI.todayim.ResultActivity
-import com.UXUI.todayim.database.Diary
 import com.UXUI.todayim.database.DiaryDatabase
 import com.UXUI.todayim.databinding.FragmentViewListBinding
-import com.google.gson.Gson
 
 class ListViewFragment : Fragment() {
 
@@ -29,8 +27,15 @@ class ListViewFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+//        val notificationsViewModel =
+//            ViewModelProvider(this)[ListViewModel::class.java]
+
         _binding = FragmentViewListBinding.inflate(inflater, container, false)
-        roomDatabase = DiaryDatabase.getInstance(binding.root.context)!!
+
+//        val textView: TextView = binding.listViewMainTv
+//        notificationsViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
 
         return binding.root
     }
@@ -40,14 +45,10 @@ class ListViewFragment : Fragment() {
 
         binding.listRecordRv.adapter = recordRV
         binding.listRecordRv.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recordRV.setRecordClickListener(object : RecordRVAdapter.RecordClickListener {
-            override fun onItemClick(diary: Diary) {
-                val gson = Gson()
+            override fun onItemClick() {
                 val intent = Intent(context, ResultActivity::class.java)
-
-                intent.putExtra("diaryInfo", gson.toJson(diary))
                 startActivity(intent)
             }
         })
@@ -55,6 +56,7 @@ class ListViewFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        roomDatabase = DiaryDatabase.getInstance(binding.root.context)!!
         records = roomDatabase.diaryDao().getAllDiaryData()
 
         initRecyclerView()

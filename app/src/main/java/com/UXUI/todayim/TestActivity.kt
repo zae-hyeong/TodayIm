@@ -25,6 +25,7 @@ class TestActivity: BaseActivity() {
     private val adjectiveResult= ArrayList<DiaryEmotionDetail>()
     private val categoryResult= ArrayList<DiaryEmotionCategory>()
 
+
     private var i: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {

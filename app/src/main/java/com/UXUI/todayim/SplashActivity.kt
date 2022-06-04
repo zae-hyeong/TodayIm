@@ -16,15 +16,10 @@ class SplashActivity: BaseActivity() {
 
     lateinit var binding: ActivitySplashBinding
 
-    companion object {
-        private const val DURATION : Long = 1500
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivitySplashBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         addDummyAdjectives()
 
@@ -32,6 +27,10 @@ class SplashActivity: BaseActivity() {
             //액티비티 이동
             startMainActivity()
         }, DURATION)
+    }
+
+    companion object {
+        private const val DURATION : Long = 1500
     }
 
     override fun onBackPressed() {
