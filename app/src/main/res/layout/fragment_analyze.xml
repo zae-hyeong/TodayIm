@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
 
-                android:text="@string/emoji_angry"
+                android:text="@string/emoji_sad"
                 android:textSize="95sp"
                 android:textColor="@color/sub"
                 app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
 
-                android:text="슬픔"
+                android:text="미움"
                 android:textSize="24sp"
                 android:textColor="@color/point"
                 app:layout_constraintStart_toStartOf="parent"
