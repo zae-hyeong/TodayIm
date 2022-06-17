@@ -66,6 +66,9 @@ class CalendarViewFragment : Fragment(), View.OnClickListener, OnDayClickListene
         binding.btnModify.visibility = View.INVISIBLE
         binding.btnRemove.visibility = View.INVISIBLE
         binding.btnDetail.visibility = View.INVISIBLE
+        binding.etContent.visibility = View.INVISIBLE
+        binding.calendarDivideView.visibility = View.INVISIBLE
+        binding.tvClickDate.visibility = View.INVISIBLE
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -105,6 +108,8 @@ class CalendarViewFragment : Fragment(), View.OnClickListener, OnDayClickListene
                     binding.btnRemove.visibility = View.INVISIBLE
                     binding.btnDetail.visibility = View.INVISIBLE
                     binding.etContent.visibility = View.INVISIBLE
+                    binding.calendarDivideView.visibility = View.INVISIBLE
+                    binding.tvClickDate.visibility = View.INVISIBLE
                     binding.tvClickDate.text = ""
                     with(binding) { etContent.setText("") }
                 }
@@ -116,6 +121,8 @@ class CalendarViewFragment : Fragment(), View.OnClickListener, OnDayClickListene
                 binding.btnRemove.visibility = View.VISIBLE
                 binding.btnDetail.visibility = View.VISIBLE
                 binding.etContent.visibility = View.VISIBLE
+                binding.calendarDivideView.visibility = View.VISIBLE
+                binding.tvClickDate.visibility = View.VISIBLE
                 binding.tvClickDate.text = clickDiaryItem!!.diaryDate
                 binding.etContent.setText(clickDiaryItem!!.diaryComment)
             }

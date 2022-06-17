@@ -2,6 +2,8 @@ package com.UXUI.todayim
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.UXUI.todayim.databinding.ActivityMainBinding
 import com.UXUI.todayim.ui.analyze.AnalyzeFragment
 import com.UXUI.todayim.ui.home.HomeFragment
@@ -34,6 +36,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initNavigation() {
+
         supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment_activity_main, HomeFragment())
             .commitAllowingStateLoss()
 

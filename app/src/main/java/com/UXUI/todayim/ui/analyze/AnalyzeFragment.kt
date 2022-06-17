@@ -148,8 +148,8 @@ class AnalyzeFragment : Fragment() {
 //            }
 //        }
 
-        binding.analyzeEmojiTv.text = emojiArray[6]
+        binding.analyzeEmojiTv.text = emojiArray[6]//todo 현재 더미코드, 변경 필요
 
-        binding.analyzeEmotionNameTv.text = categories!![6].adjectiveCategoryName
+        binding.analyzeEmotionNameTv.text = "화남"//todo 현재 더미코드, 변경 필요
     }
 }

@@ -31,6 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/test_msg"
+                android:textSize="20sp"
                 android:textColor="@color/point"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -62,6 +63,7 @@
                     android:gravity="center"
                     android:text="버튼 1"
                     android:textSize="20sp"
+                    android:layout_margin="8dp"
                     android:textColor="@color/point"
                     android:background="@drawable/bg_custom_shadow_btn"
                     />
@@ -72,6 +74,7 @@
                     android:gravity="center"
                     android:text="버튼 2"
                     android:textSize="20sp"
+                    android:layout_margin="8dp"
                     android:textColor="@color/point"
                     android:background="@drawable/bg_custom_shadow_btn"
                     />
@@ -82,6 +85,7 @@
                     android:gravity="center"
                     android:text="버튼 3"
                     android:textSize="20sp"
+                    android:layout_margin="8dp"
                     android:textColor="@color/point"
                     android:background="@drawable/bg_custom_shadow_btn"
                     />
@@ -92,6 +96,7 @@
                     android:gravity="center"
                     android:text="버튼 4"
                     android:textSize="20sp"
+                    android:layout_margin="8dp"
                     android:textColor="@color/point"
                     android:background="@drawable/bg_custom_shadow_btn"
                     />
