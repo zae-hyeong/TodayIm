@@ -10,7 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="15dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -18,8 +19,8 @@
             android:layout_weight="1"
             android:gravity="center"
 
-            android:text="한 주 동안 나는"
-            android:textSize="24sp"
+            android:text="@string/analyze_ment"
+            android:textSize="22sp"
             android:textColor="@color/point"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -28,9 +29,8 @@
         <LinearLayout
             android:id="@+id/analyze_emotion_linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="280dp"
+            android:layout_height="wrap_content"
             android:paddingHorizontal="8dp"
-            android:layout_weight="1"
             android:layout_marginHorizontal="5dp"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
 
-                android:text="@string/emoji_angry"
+                android:text="@string/emoji_sad"
                 android:textSize="95sp"
                 android:textColor="@color/sub"
                 app:layout_constraintStart_toStartOf="parent"
@@ -66,9 +66,10 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
 
-                android:text="슬픔"
+                android:text="미움"
                 android:textSize="24sp"
                 android:textColor="@color/point"
+                android:paddingBottom="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 />

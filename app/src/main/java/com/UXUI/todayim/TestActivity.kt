@@ -30,7 +30,12 @@ class TestActivity: BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setInitialize()
+        binding = ActivityTestBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        emotionAdjectiveDB = EmotionAdjectiveDatabase.getInstance(this)!!
+
+        //setInitialize()
         initView()
     }
 
@@ -52,10 +57,7 @@ class TestActivity: BaseActivity() {
         }
     }
     private fun setInitialize(){
-        binding = ActivityTestBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        emotionAdjectiveDB = EmotionAdjectiveDatabase.getInstance(this)!!
     }
 
     private fun initView() {

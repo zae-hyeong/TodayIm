@@ -19,6 +19,18 @@
             android:layout_height="wrap_content"
             android:background="@color/main"
             android:backgroundTint="@color/main"
+            app:headerColor="@color/main"
+            app:headerLabelColor="@color/point"
+            app:pagesColor="@color/main"
+            app:daysLabelsColor="@color/point"
+            app:selectionColor="@color/sub"
+            app:abbreviationsLabelsColor="@color/point"
+            app:highlightedDaysLabelsColor="@color/point"
+            app:anotherMonthsDaysLabelsColor="@color/main"
+            app:selectionLabelColor="@color/white_red"
+            app:todayLabelColor="@color/yellow"
+            app:abbreviationsBarColor="@color/main"
+
             android:theme="@style/CalenderViewCustom" />
 
         <LinearLayout
@@ -39,7 +51,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:visibility="visible"
-                android:layout_marginHorizontal="16dp"
+                android:layout_marginHorizontal="6dp"
                 android:background="@drawable/bg_button_base">
 <!--                android:background="@drawable/shape_rounded"-->
 <!--                android:backgroundTint="#FF5252">-->
@@ -57,7 +69,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_marginHorizontal="16dp"
+                android:layout_marginHorizontal="6dp"
                 android:visibility="visible"
                 android:background="@drawable/bg_button_base"
                 >
@@ -76,9 +88,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:visibility="visible"
-                android:layout_marginHorizontal="16dp"
+                android:layout_marginHorizontal="6dp"
                 android:background="@drawable/shape_rounded"
-                android:backgroundTint="#FF5252">
+                android:backgroundTint="@color/white_red">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -91,24 +103,32 @@
 
         </LinearLayout>
 
+        <View
+            android:id="@+id/calendar_divide_view"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="8dp"
+            android:background="@color/point"
+            android:layout_marginBottom="8dp"
+            android:layout_height="0.5dp"/>
+
         <TextView
             android:id="@+id/tv_click_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="8dp"
-            android:text=""
+            android:layout_gravity="center"
+            android:gravity="center"
             android:textColor="@color/point"
-            android:textSize="30sp"/>
+            android:textSize="24sp"
+            tools:text="2000-00-00"/>
 
         <EditText
             android:id="@+id/et_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:visibility="invisible"
-            android:layout_margin="16dp"
-            android:layout_marginBottom="32dp"
+            android:visibility="visible"
+            android:layout_marginHorizontal="26dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/shape_rounded"
             android:gravity="top|left"
             android:inputType="textMultiLine"
