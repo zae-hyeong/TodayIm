@@ -71,7 +71,7 @@
         <shape>
             <padding
                 android:bottom="1.5dp"
-                android:right="1.5dp" />
+                android:right="1dp" />
 
             <solid android:color="@color/point06" />
             <corners
@@ -82,7 +82,7 @@
         <shape>
             <padding
                 android:bottom="1.5dp"
-                android:right="1.5dp"/>
+                android:right="1dp"/>
 
             <solid android:color="@color/point07" />
             <corners
@@ -93,7 +93,7 @@
         <shape>
             <padding
                 android:bottom="1.5dp"
-                android:right="1.5dp" />
+                android:right="1dp" />
 
             <solid android:color="@color/point08" />
             <corners
@@ -104,7 +104,7 @@
         <shape>
             <padding
                 android:bottom="1.5dp"
-                android:right="1.5dp" />
+                android:right="1dp" />
 
             <solid android:color="@color/point09" />
             <corners
@@ -115,7 +115,7 @@
         <shape>
             <padding
                 android:bottom="1.5dp"
-                android:right="1.5dp"
+                android:right="1dp"
                 />
 
             <solid android:color="@color/point10" />

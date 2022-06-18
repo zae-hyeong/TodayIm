@@ -30,8 +30,6 @@ class ResultActivity: BaseActivity() {
     private lateinit var roomDatabase: DiaryDatabase
     private val gson = Gson()
 
-    private val progressBarInterval: Float = 100F/(TEST_REPEAT_NUM.toFloat())
-
     private lateinit var adjectiveResult: List<DiaryEmotionDetail>
     private lateinit var adjectiveNum: List<Int>
     private lateinit var categoryResult: List<DiaryEmotionCategory>
@@ -139,14 +137,14 @@ class ResultActivity: BaseActivity() {
         while ( i < categoryResult.size ) {
             val layoutInflater = this.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
             val categoryProgress = layoutInflater.inflate(R.layout.layout_result_progressbar, null)
-
-            percentage = adjectiveNum[i] * progressBarInterval
+            val pbView = categoryProgress.findViewById<ProgressBar>(R.id.layout_result_progressbar)
+            percentage = (adjectiveNum[i].toFloat()/TEST_REPEAT_NUM)*100
 
             categoryProgress.findViewById<TextView>(R.id.layout_result_category_tv).text =
                 categoryResult[i].adjectiveCategoryName
 
-            categoryProgress.findViewById<ProgressBar>(R.id.layout_result_progressbar)
-                .progress = percentage.toInt()
+            pbView.max = 100
+            pbView.progress = percentage.toInt()
 
             categoryProgress.findViewById<TextView>(R.id.layout_result_percentage_tv)
                 .text =  String.format("%.1f%%", percentage)
@@ -172,7 +170,8 @@ class ResultActivity: BaseActivity() {
         val diaryIdx = nowDiary.diaryIdx
         categoryResult = roomDatabase.diaryDao().getDiaryCategories(diaryIdx)
         adjectiveResult = roomDatabase.diaryDao().getDiaryAdjectives(diaryIdx)
-        adjectiveNum = roomDatabase.diaryDao().getCategoryAdjectiveNum(diaryIdx)
+        adjectiveNum = countAdjectiveResult(adjectiveResult)
+        //adjectiveNum = roomDatabase.diaryDao().getCategoryAdjectiveNum(diaryIdx) //todo Dao문 수정 필요
 //        adjectiveNum = countAdjectiveResult(adjectiveResult)
     }
 
