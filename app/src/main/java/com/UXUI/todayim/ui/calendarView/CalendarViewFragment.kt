@@ -158,6 +158,8 @@ class CalendarViewFragment : Fragment(), View.OnClickListener, OnDayClickListene
                         binding.btnModify.visibility = View.INVISIBLE
                         binding.btnRemove.visibility = View.INVISIBLE
                         binding.btnDetail.visibility = View.INVISIBLE
+                        binding.calendarDivideView.visibility = View.INVISIBLE
+                        binding.etContent.visibility = View.INVISIBLE
                         binding.tvClickDate.text = ""
                         binding.etContent.setText("")
                         Toast.makeText(binding.root.context, "삭제가 완료 되었습니다.", Toast.LENGTH_SHORT).show()
